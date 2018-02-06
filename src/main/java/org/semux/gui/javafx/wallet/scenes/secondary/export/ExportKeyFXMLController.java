@@ -28,15 +28,15 @@ public class ExportKeyFXMLController implements Initializable {
     @FXML
     private TableView<?> exportKeyTableView;
     @FXML
-    private TableColumn<?, ?> numberTableColumn;
+    private TableColumn<?, ?> numberExportKeyTableColumn;
     @FXML
-    private TableColumn<?, ?> addressTableColumn;
+    private TableColumn<?, ?> addressExportKeyTableColumn;
     @FXML
-    private TableColumn<?, ?> nameTableColumn;
+    private TableColumn<?, ?> nameExportKeyTableColumn;
     @FXML
-    private TableColumn<?, ?> keyTableColumn;
+    private TableColumn<?, ?> keyExportKeyTableColumn;
     @FXML
-    private Button copyButton;
+    private Button copyKeyButton;
 
     /**
      * Initializes the controller class.

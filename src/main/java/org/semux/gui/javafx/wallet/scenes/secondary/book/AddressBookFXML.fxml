@@ -29,9 +29,9 @@
          <children>
             <TableView fx:id="addressBookTableView" tableMenuButtonVisible="true" GridPane.columnSpan="3" GridPane.rowSpan="2">
               <columns>
-                <TableColumn fx:id="numberTableColumn" minWidth="20.0" prefWidth="20.0" text="#" />
-                <TableColumn fx:id="nameTableColumn" minWidth="100.0" prefWidth="100.0" text="Name" />
-                  <TableColumn fx:id="addressTableColumn" minWidth="250.0" prefWidth="300.0" text="Address" />
+                <TableColumn fx:id="numberAddressBookTableColumn" minWidth="20.0" prefWidth="20.0" text="#" />
+                <TableColumn fx:id="nameAddressBookTableColumn" minWidth="100.0" prefWidth="100.0" text="Name" />
+                  <TableColumn fx:id="addressAddressBookTableColumn" minWidth="250.0" prefWidth="300.0" text="Address" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -39,7 +39,7 @@
             </TableView>
             <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="addButton" minHeight="40.0" mnemonicParsing="false" onKeyPressed="#addOnEnterKeyPressed" onMouseClicked="#add" prefWidth="100.0" styleClass="control-interactive" text="Add">
+                  <Button fx:id="addAddressButton" minHeight="40.0" mnemonicParsing="false" onKeyPressed="#addOnEnterKeyPressed" onMouseClicked="#add" prefWidth="100.0" styleClass="control-interactive" text="Add">
                      <font>
                         <Font size="12.0" />
                      </font></Button>
@@ -50,7 +50,7 @@
             </HBox>
             <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="copyButton" minHeight="40.0" mnemonicParsing="false" onKeyPressed="#copyOnEnterKeyPressed" onMouseClicked="#copy" prefWidth="100.0" styleClass="control-interactive" text="Copy">
+                  <Button fx:id="copyAddressButton" minHeight="40.0" mnemonicParsing="false" onKeyPressed="#copyOnEnterKeyPressed" onMouseClicked="#copy" prefWidth="100.0" styleClass="control-interactive" text="Copy">
                      <font>
                         <Font size="12.0" />
                      </font></Button>
@@ -58,7 +58,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="deleteButton" minHeight="40.0" mnemonicParsing="false" onKeyPressed="#deleteOnEnterKeyPressed" onMouseClicked="#delete" prefWidth="100.0" styleClass="control-interactive" text="Delete">
+                  <Button fx:id="deleteAddressButton" minHeight="40.0" mnemonicParsing="false" onKeyPressed="#deleteOnEnterKeyPressed" onMouseClicked="#delete" prefWidth="100.0" styleClass="control-interactive" text="Delete">
                      <font>
                         <Font size="12.0" />
                      </font></Button>

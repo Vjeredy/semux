@@ -32,11 +32,11 @@
          <children>
             <TableView fx:id="accountsTableView" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" GridPane.columnSpan="3">
               <columns>
-                <TableColumn fx:id="numberTableColumn" minWidth="15.0" prefWidth="15.0" text="#" />
-                <TableColumn fx:id="nameTableColumn" minWidth="80.0" text="Name" />
-                  <TableColumn fx:id="addressTableColumn" minWidth="300.0" prefWidth="300.0" text="Address" />
-                  <TableColumn fx:id="availableTableColumn" minWidth="80.0" prefWidth="200.0" text="Available" />
-                  <TableColumn fx:id="lockedTableColumn" minWidth="80.0" prefWidth="180.0" text="Locked" />
+                <TableColumn fx:id="numberAccountsTableColumn" minWidth="15.0" prefWidth="15.0" text="#" />
+                <TableColumn fx:id="nameAccountsTableColumn" minWidth="80.0" text="Name" />
+                  <TableColumn fx:id="addressAccountsTableColumn" minWidth="300.0" prefWidth="300.0" text="Address" />
+                  <TableColumn fx:id="availableAccountsTableColumn" minWidth="80.0" prefWidth="200.0" text="Available" />
+                  <TableColumn fx:id="lockedAccountsTableColumn" minWidth="80.0" prefWidth="180.0" text="Locked" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -44,7 +44,7 @@
             </TableView>
             <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="renameButton" minHeight="40.0" mnemonicParsing="false" onKeyPressed="#renameOnEnterKeyPressed" onMouseClicked="#rename" prefWidth="110.0" styleClass="control-interactive" text="Rename Account">
+                  <Button fx:id="renameAccountButton" minHeight="40.0" mnemonicParsing="false" onKeyPressed="#renameOnEnterKeyPressed" onMouseClicked="#rename" prefWidth="110.0" styleClass="control-interactive" text="Rename Account">
                      <font>
                         <Font size="12.0" />
                      </font></Button>
@@ -55,7 +55,7 @@
             </HBox>
             <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="newButton" minHeight="40.0" mnemonicParsing="false" onKeyPressed="#addOnEnterKeyPressed" onMouseClicked="#add" prefWidth="110.0" styleClass="control-interactive" text="New Account">
+                  <Button fx:id="newAccountButton" minHeight="40.0" mnemonicParsing="false" onKeyPressed="#addOnEnterKeyPressed" onMouseClicked="#add" prefWidth="110.0" styleClass="control-interactive" text="New Account">
                      <font>
                         <Font size="12.0" />
                      </font></Button>
@@ -63,7 +63,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="deleteButton" minHeight="40.0" mnemonicParsing="false" onKeyPressed="#deleteOnEnterKeyPressed" onMouseClicked="#delete" prefWidth="110.0" styleClass="control-interactive" text="Delete Account">
+                  <Button fx:id="deleteAccountButton" minHeight="40.0" mnemonicParsing="false" onKeyPressed="#deleteOnEnterKeyPressed" onMouseClicked="#delete" prefWidth="110.0" styleClass="control-interactive" text="Delete Account">
                      <font>
                         <Font size="12.0" />
                      </font></Button>

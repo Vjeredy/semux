@@ -45,17 +45,17 @@ public class AddressBookFXMLController implements Initializable, org.semux.gui.j
     @FXML
     private TableView<?> addressBookTableView;
     @FXML
-    private TableColumn<?, ?> numberTableColumn;
+    private TableColumn<?, ?> numberAddressBookTableColumn;
     @FXML
-    private TableColumn<?, ?> nameTableColumn;
+    private TableColumn<?, ?> nameAddressBookTableColumn;
     @FXML
-    private TableColumn<?, ?> addressTableColumn;
+    private TableColumn<?, ?> addressAddressBookTableColumn;
     @FXML
-    private Button addButton;
+    private Button addAddressButton;
     @FXML
-    private Button copyButton;
+    private Button copyAddressButton;
     @FXML
-    private Button deleteButton;
+    private Button deleteAddressButton;
 
     /**
      * Initializes the controller class.

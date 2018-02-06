@@ -41,21 +41,21 @@ public class AccountsManagerFXMLController implements Initializable, org.semux.g
     @FXML
     private TableView<?> accountsTableView;
     @FXML
-    private TableColumn<?, ?> numberTableColumn;
+    private TableColumn<?, ?> numberAccountsTableColumn;
     @FXML
-    private TableColumn<?, ?> nameTableColumn;
+    private TableColumn<?, ?> nameAccountsTableColumn;
     @FXML
-    private TableColumn<?, ?> addressTableColumn;
+    private TableColumn<?, ?> addressAccountsTableColumn;
     @FXML
-    private TableColumn<?, ?> availableTableColumn;
+    private TableColumn<?, ?> availableAccountsTableColumn;
     @FXML
-    private TableColumn<?, ?> lockedTableColumn;
+    private TableColumn<?, ?> lockedAccountsTableColumn;
     @FXML
-    private Button renameButton;
+    private Button renameAccountButton;
     @FXML
-    private Button newButton;
+    private Button newAccountButton;
     @FXML
-    private Button deleteButton;
+    private Button deleteAccountButton;
 
     /**
      * Initializes the controller class.

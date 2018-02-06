@@ -69,4 +69,6 @@ public interface Options {
     int MIN_NAME_SIZE = 4;
     int MAX_NAME_SIZE = 16;
 
+    int TRANSACTION_LIMIT = 1024;
+
 }

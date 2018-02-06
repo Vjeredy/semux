@@ -26,15 +26,17 @@ public class StageBuilder implements org.semux.gui.javafx.wallet.Options {
      *            scene to bind
      */
     public StageBuilder(Stage stage, Scene scene) {
-        try {
-            stage.setScene(scene);
-            Image logo = new Image(getClass().getResourceAsStream(LOGO_ICON_PATH));
-            stage.getIcons().add(logo);
-            Platform.runLater(() -> stage.show());
-            stage.requestFocus();
-        } catch (Exception exception) {
-            System.out.println("Exception:" + exception);
-        }
+        Platform.runLater(() -> {
+            try {
+                stage.setScene(scene);
+                Image logo = new Image(getClass().getResourceAsStream(LOGO_ICON_PATH));
+                stage.getIcons().add(logo);
+                stage.show();
+                stage.toFront();
+                stage.requestFocus();
+            } catch (Exception exception) {
+            }
+        });
     }
 
 }
