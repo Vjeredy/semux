@@ -4,7 +4,7 @@
  * Distributed under the MIT software license, see the accompanying file
  * LICENSE or https://opensource.org/licenses/mit-license.php
  */
-package wallet;
+package org.semux.gui.javafx.wallet;
 
 import java.net.URL;
 
@@ -14,7 +14,7 @@ import javafx.scene.control.Dialog;
 /**
  * Loads .css stylesheet and adds it to scene.
  */
-public class StylesLoader {
+public class StylesLoader implements org.semux.gui.javafx.wallet.Options {
 
     /**
      * Loader constructor for scenes. Loads .css stylesheet and adds it to scene.
@@ -25,7 +25,7 @@ public class StylesLoader {
      *            path to .css file
      */
     public StylesLoader(Scene scene, String stylePath) {
-        URL cssURL = getClass().getResource("/" + stylePath);
+        URL cssURL = getClass().getResource(RUN_PATH + stylePath);
         String css = cssURL.toExternalForm();
         scene.getStylesheets().add(css);
     }
@@ -39,7 +39,7 @@ public class StylesLoader {
      *            path to .css file
      */
     public StylesLoader(Dialog dialog, String stylePath) {
-        dialog.getDialogPane().getStylesheets().add(getClass().getResource("/" + stylePath).toExternalForm());
+        dialog.getDialogPane().getStylesheets().add(getClass().getResource(RUN_PATH + stylePath).toExternalForm());
     }
 
 }

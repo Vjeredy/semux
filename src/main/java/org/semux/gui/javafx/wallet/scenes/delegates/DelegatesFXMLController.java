@@ -4,7 +4,7 @@
  * Distributed under the MIT software license, see the accompanying file
  * LICENSE or https://opensource.org/licenses/mit-license.php
  */
-package wallet.scenes.delegates;
+package org.semux.gui.javafx.wallet.scenes.delegates;
 
 import java.awt.Robot;
 import java.net.URL;
@@ -24,18 +24,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
-import static wallet.Options.DEFAULT_FEE;
-import static wallet.Options.MAX_NAME_SIZE;
-import static wallet.Options.MIN_NAME_SIZE;
-
-import wallet.TextFieldFormatter;
-import wallet.controls.navigation.NavigationButtonsActivator;
+import org.semux.gui.javafx.wallet.TextFieldFormatter;
+import org.semux.gui.javafx.wallet.controls.navigation.NavigationButtonsActivator;
 
 /**
  * Delegates scene controller. Processes votes, unvotes, delegates
  * registrations.
  */
-public class DelegatesFXMLController implements Initializable {
+public class DelegatesFXMLController implements Initializable, org.semux.gui.javafx.wallet.Options {
 
     private TextFieldFormatter votesFormatter;
     private TextFieldFormatter unvotesFormatter;

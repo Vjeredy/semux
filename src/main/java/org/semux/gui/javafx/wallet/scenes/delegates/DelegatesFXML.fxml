@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
-<?import wallet.controls.footer.FooterFXMLController?>
-<?import wallet.controls.menu.MenuBarFXMLController?>
-<?import wallet.controls.navigation.NavigationBarFXMLController?>
+<?import org.semux.gui.javafx.wallet.controls.footer.FooterFXMLController?>
+<?import org.semux.gui.javafx.wallet.controls.menu.MenuBarFXMLController?>
+<?import org.semux.gui.javafx.wallet.controls.navigation.NavigationBarFXMLController?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="600.0" prefWidth="900.0" styleClass="anchor-pane" stylesheets="@../../resources/styles/default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wallet.scenes.delegates.DelegatesFXMLController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="600.0" prefWidth="900.0" styleClass="anchor-pane" stylesheets="@../../resources/styles/default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.semux.gui.javafx.wallet.scenes.delegates.DelegatesFXMLController">
     <children>
       <MenuBarFXMLController />
       <NavigationBarFXMLController />

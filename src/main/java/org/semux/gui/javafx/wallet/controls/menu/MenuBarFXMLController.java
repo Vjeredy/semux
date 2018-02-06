@@ -4,7 +4,7 @@
  * Distributed under the MIT software license, see the accompanying file
  * LICENSE or https://opensource.org/licenses/mit-license.php
  */
-package wallet.controls.menu;
+package org.semux.gui.javafx.wallet.controls.menu;
 
 import java.io.IOException;
 
@@ -36,30 +36,20 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
-import org.controlsfx.control.Notifications;
 
+import org.controlsfx.control.Notifications;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 
-import wallet.ApplicationLoader;
-import wallet.DialogBuilder;
-import wallet.StageBuilder;
-
-import static wallet.Options.INIT_ABOUT_WIDTH;
-import static wallet.Options.INIT_ACCOUNTS_HEIGHT;
-import static wallet.Options.INIT_ACCOUNTS_WIDTH;
-import static wallet.Options.INIT_EXPORT_HEIGHT;
-import static wallet.Options.INIT_EXPORT_WIDTH;
-import static wallet.Options.INIT_IMPORT_KEY_WIDTH;
-import static wallet.Options.INIT_CHANGE_PASSWORD_WIDTH;
-import static wallet.Options.MAX_PASSWORD_SIZE;
-import static wallet.Options.MIN_PASSWORD_SIZE;
+import org.semux.gui.javafx.wallet.ApplicationLoader;
+import org.semux.gui.javafx.wallet.DialogBuilder;
+import org.semux.gui.javafx.wallet.StageBuilder;
 
 /**
  * Custom menu controller. Can be imported .jar packed along with .fxml file
  * into Scene Builder as custom control.
  */
-public class MenuBarFXMLController extends HBox {
+public class MenuBarFXMLController extends HBox implements org.semux.gui.javafx.wallet.Options {
 
     private final Stage exportStage = new Stage();
     private final Stage accountsStage = new Stage();
@@ -262,7 +252,7 @@ public class MenuBarFXMLController extends HBox {
     @FXML
     private void exportKey() throws Exception {
         exportStage.hide();
-        String scenePath = "/wallet/scenes/secondary/export/ExportKeyFXML.fxml";
+        String scenePath = RUN_PATH + MAIN_PACKAGE_NAME + "scenes/secondary/export/ExportKeyFXML.fxml";
         Scene exportScene = new Scene(FXMLLoader.load(getClass()
                 .getResource(scenePath)), INIT_EXPORT_WIDTH, INIT_EXPORT_HEIGHT);
         StageBuilder builder = new StageBuilder(exportStage, exportScene);
@@ -274,7 +264,7 @@ public class MenuBarFXMLController extends HBox {
     @FXML
     private void manageAccounts() throws Exception {
         accountsStage.hide();
-        String scenePath = "/wallet/scenes/secondary/accounts/AccountsManagerFXML.fxml";
+        String scenePath = RUN_PATH + MAIN_PACKAGE_NAME + "scenes/secondary/accounts/AccountsManagerFXML.fxml";
         Scene accountsScene = new Scene(FXMLLoader.load(getClass()
                 .getResource(scenePath)), INIT_ACCOUNTS_WIDTH, INIT_ACCOUNTS_HEIGHT);
         StageBuilder builder = new StageBuilder(accountsStage, accountsScene);

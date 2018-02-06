@@ -7,4 +7,4 @@
 /**
  * Main scenes and their controllers.
  */
-package wallet.scenes;
+package org.semux.gui.javafx.wallet.scenes;

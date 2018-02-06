@@ -8,4 +8,4 @@
  * Root package of the project. Contains Loaders, Builders, Formatters,
  * Watchers, Options.
  */
-package wallet;
+package org.semux.gui.javafx.wallet;

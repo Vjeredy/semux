@@ -4,7 +4,7 @@
  * Distributed under the MIT software license, see the accompanying file
  * LICENSE or https://opensource.org/licenses/mit-license.php
  */
-package wallet;
+package org.semux.gui.javafx.wallet;
 
 import javafx.scene.Node;
 import javafx.scene.control.Dialog;
@@ -13,16 +13,12 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import static wallet.Options.DEFAULT_STYLES_PATH;
-import static wallet.Options.LOGO_ICON_PATH;
-import static wallet.Options.MAIN_PACKAGE_NAME;
-
 /**
  * Builder for dialog windows. Loads logo, sets graphic and .css styles.
  * 
  * @author jeredy
  */
-public class DialogBuilder {
+public class DialogBuilder implements org.semux.gui.javafx.wallet.Options {
 
     /**
      * Builder constructor dialog windows. Loads logo, sets graphic and .css styles.

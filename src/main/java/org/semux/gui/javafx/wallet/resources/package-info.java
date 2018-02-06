@@ -7,4 +7,4 @@
 /**
  * Contains resources that are loaded both before and after application startup.
  */
-package wallet.resources;
+package org.semux.gui.javafx.wallet.resources;

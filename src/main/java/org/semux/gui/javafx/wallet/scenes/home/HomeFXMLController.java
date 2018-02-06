@@ -4,7 +4,7 @@
  * Distributed under the MIT software license, see the accompanying file
  * LICENSE or https://opensource.org/licenses/mit-license.php
  */
-package wallet.scenes.home;
+package org.semux.gui.javafx.wallet.scenes.home;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,11 +15,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-import wallet.ApplicationLoader;
-import wallet.WalletAccount;
-import wallet.WalletSession;
-
-import wallet.controls.navigation.NavigationButtonsActivator;
+import org.semux.gui.javafx.wallet.ApplicationLoader;
+import org.semux.gui.javafx.wallet.WalletAccount;
+import org.semux.gui.javafx.wallet.WalletSession;
+import org.semux.gui.javafx.wallet.controls.navigation.NavigationButtonsActivator;
 
 /**
  * Home scene controller. Outputs account`s state and transactions data.

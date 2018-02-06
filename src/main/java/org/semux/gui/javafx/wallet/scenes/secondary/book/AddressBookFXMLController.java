@@ -4,7 +4,7 @@
  * Distributed under the MIT software license, see the accompanying file
  * LICENSE or https://opensource.org/licenses/mit-license.php
  */
-package wallet.scenes.secondary.book;
+package org.semux.gui.javafx.wallet.scenes.secondary.book;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,14 +33,12 @@ import org.controlsfx.control.Notifications;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 
-import wallet.DialogBuilder;
-
-import static wallet.Options.INIT_ADD_ADDRESS_WIDTH;
+import org.semux.gui.javafx.wallet.DialogBuilder;
 
 /**
  * User address book controller.
  */
-public class AddressBookFXMLController implements Initializable {
+public class AddressBookFXMLController implements Initializable, org.semux.gui.javafx.wallet.Options {
 
     @FXML
     private AnchorPane anchorPane;

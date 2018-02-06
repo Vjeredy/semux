@@ -4,7 +4,7 @@
  * Distributed under the MIT software license, see the accompanying file
  * LICENSE or https://opensource.org/licenses/mit-license.php
  */
-package wallet.scenes.send;
+package org.semux.gui.javafx.wallet.scenes.send;
 
 import java.awt.Robot;
 import java.net.URL;
@@ -30,20 +30,20 @@ import javafx.stage.Stage;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 
-import static wallet.Options.INIT_BOOK_HEIGHT;
-import static wallet.Options.INIT_BOOK_WIDTH;
-import static wallet.Options.DEFAULT_FEE;
+import static org.semux.gui.javafx.wallet.Options.INIT_BOOK_HEIGHT;
+import static org.semux.gui.javafx.wallet.Options.INIT_BOOK_WIDTH;
+import static org.semux.gui.javafx.wallet.Options.DEFAULT_FEE;
 
-import wallet.ApplicationLoader;
-import wallet.TextFieldFormatter;
-import wallet.controls.navigation.NavigationButtonsActivator;
-import wallet.StageBuilder;
+import org.semux.gui.javafx.wallet.ApplicationLoader;
+import org.semux.gui.javafx.wallet.TextFieldFormatter;
+import org.semux.gui.javafx.wallet.controls.navigation.NavigationButtonsActivator;
+import org.semux.gui.javafx.wallet.StageBuilder;
 
 /**
  * Send scene controller. Allows user to create new transaction and send SEMs to
  * desired address.
  */
-public class SendFXMLController implements Initializable {
+public class SendFXMLController implements Initializable, org.semux.gui.javafx.wallet.Options {
 
     private final Stage bookStage = new Stage();
     private final ToggleGroup radioButtons = new ToggleGroup();
@@ -127,7 +127,7 @@ public class SendFXMLController implements Initializable {
     @FXML
     private void openAddressBook() throws Exception {
         bookStage.hide();
-        String scenePath = "/wallet/scenes/secondary/book/AddressBookFXML.fxml";
+        String scenePath = RUN_PATH + MAIN_PACKAGE_NAME + "scenes/secondary/book/AddressBookFXML.fxml";
         Scene bookScene = new Scene(FXMLLoader.load(getClass()
                 .getResource(scenePath)), INIT_BOOK_WIDTH, INIT_BOOK_HEIGHT);
         StageBuilder builder = new StageBuilder(bookStage, bookScene);

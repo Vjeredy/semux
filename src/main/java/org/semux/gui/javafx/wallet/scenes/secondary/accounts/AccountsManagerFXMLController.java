@@ -4,7 +4,7 @@
  * Distributed under the MIT software license, see the accompanying file
  * LICENSE or https://opensource.org/licenses/mit-license.php
  */
-package wallet.scenes.secondary.accounts;
+package org.semux.gui.javafx.wallet.scenes.secondary.accounts;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,18 +29,13 @@ import org.controlsfx.control.Notifications;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 
-import wallet.DialogBuilder;
-
-import static wallet.Options.INIT_NEW_ACCOUNT_WIDTH;
-import static wallet.Options.INIT_RENAME_ACCOUNT_WIDTH;
-import static wallet.Options.MAX_NAME_SIZE;
-import static wallet.Options.MIN_NAME_SIZE;
+import org.semux.gui.javafx.wallet.DialogBuilder;
 
 /**
  * User accounts manager controller. Allows to add new, rename or delete
  * existing accounts.
  */
-public class AccountsManagerFXMLController implements Initializable {
+public class AccountsManagerFXMLController implements Initializable, org.semux.gui.javafx.wallet.Options {
     @FXML
     private AnchorPane anchorPane;
     @FXML

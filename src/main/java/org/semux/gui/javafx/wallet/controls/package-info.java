@@ -7,4 +7,4 @@
 /**
  * Contains custom controls that are widely used in application.
  */
-package wallet.controls;
+package org.semux.gui.javafx.wallet.controls;

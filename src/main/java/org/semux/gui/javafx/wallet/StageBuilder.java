@@ -4,19 +4,17 @@
  * Distributed under the MIT software license, see the accompanying file
  * LICENSE or https://opensource.org/licenses/mit-license.php
  */
-package wallet;
+package org.semux.gui.javafx.wallet;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import static wallet.Options.LOGO_ICON_PATH;
-
 /**
  * Builder for stages. Loads logo, binds scene to stage, shows stage.
  */
-public class StageBuilder {
+public class StageBuilder implements org.semux.gui.javafx.wallet.Options {
 
     /**
      * Builder constructor for stages. Loads logo, binds scene to stage, shows

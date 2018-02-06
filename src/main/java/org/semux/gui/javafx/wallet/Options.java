@@ -4,7 +4,7 @@
  * Distributed under the MIT software license, see the accompanying file
  * LICENSE or https://opensource.org/licenses/mit-license.php
  */
-package wallet;
+package org.semux.gui.javafx.wallet;
 
 /**
  * URLs, paths, sizes, constants.
@@ -17,6 +17,7 @@ public interface Options {
     String RESOURCES_PACKAGE_NAME = "resources/";
     String STYLES_PACKAGE_NAME = "styles/";
     String ICONS_PACKAGE_NAME = "icons/";
+    String RUN_PATH = "/org/semux/gui/javafx/";
 
     String HOME_ICON_PATH = RESOURCES_PACKAGE_NAME + ICONS_PACKAGE_NAME + "home.png";
     String SEND_ICON_PATH = RESOURCES_PACKAGE_NAME + ICONS_PACKAGE_NAME + "send.png";

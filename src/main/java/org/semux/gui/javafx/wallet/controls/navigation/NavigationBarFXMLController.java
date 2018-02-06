@@ -4,7 +4,7 @@
  * Distributed under the MIT software license, see the accompanying file
  * LICENSE or https://opensource.org/licenses/mit-license.php
  */
-package wallet.controls.navigation;
+package org.semux.gui.javafx.wallet.controls.navigation;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,18 +42,16 @@ import org.controlsfx.control.Notifications;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 
-import wallet.ApplicationLoader;
-import wallet.DialogBuilder;
-import wallet.StageBuilder;
-import wallet.WindowSizeStateWatcher;
-
-import static wallet.Options.INIT_UNLOCK_WIDTH;
+import org.semux.gui.javafx.wallet.ApplicationLoader;
+import org.semux.gui.javafx.wallet.DialogBuilder;
+import org.semux.gui.javafx.wallet.StageBuilder;
+import org.semux.gui.javafx.wallet.WindowSizeStateWatcher;
 
 /**
  * Custom navigation buttons bar controller. Can be imported .jar packed along
  * with .fxml file into Scene Builder as custom control.
  */
-public class NavigationBarFXMLController extends HBox {
+public class NavigationBarFXMLController extends HBox implements org.semux.gui.javafx.wallet.Options {
 
     private int buttonColumn;
     private boolean isLocked = false;
