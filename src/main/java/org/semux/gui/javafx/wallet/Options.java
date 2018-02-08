@@ -14,10 +14,14 @@ public interface Options {
     String HELP_URL = "https://github.com/semuxproject/semux/wiki";
 
     String MAIN_PACKAGE_NAME = "wallet/";
+    String SCENES_PACKAGE_NAME = "scenes/";
     String RESOURCES_PACKAGE_NAME = "resources/";
     String STYLES_PACKAGE_NAME = "styles/";
     String ICONS_PACKAGE_NAME = "icons/";
+
     String RUN_PATH = "/org/semux/gui/javafx/";
+
+    String HOME_SCENE_PATH = SCENES_PACKAGE_NAME + "HomeFXML.fxml";
 
     String HOME_ICON_PATH = RESOURCES_PACKAGE_NAME + ICONS_PACKAGE_NAME + "home.png";
     String SEND_ICON_PATH = RESOURCES_PACKAGE_NAME + ICONS_PACKAGE_NAME + "send.png";

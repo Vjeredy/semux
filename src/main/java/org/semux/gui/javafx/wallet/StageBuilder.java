@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 /**
  * Builder for stages. Loads logo, binds scene to stage, shows stage.
  */
-public class StageBuilder implements org.semux.gui.javafx.wallet.Options {
+public class StageBuilder implements Options {
 
     /**
      * Builder constructor for stages. Loads logo, binds scene to stage, shows

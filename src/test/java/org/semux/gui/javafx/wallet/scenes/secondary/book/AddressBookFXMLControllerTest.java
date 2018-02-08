@@ -8,7 +8,7 @@ package org.semux.gui.javafx.wallet.scenes.secondary.book;
 
 import com.sun.javafx.application.PlatformImpl;
 
-import javafx.application.Platform;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -33,6 +34,7 @@ public class AddressBookFXMLControllerTest extends ApplicationTest {
 
     @BeforeClass
     public static void loadAddressBookGUI() {
+        PlatformImpl.setImplicitExit(false);
         PlatformImpl.startup(() -> {
             try {
                 testAddressBookStage = new Stage();
@@ -43,14 +45,8 @@ public class AddressBookFXMLControllerTest extends ApplicationTest {
                 testAddressBookStage.toFront();
                 testAddressBookStage.requestFocus();
             } catch (Exception exception) {
+                System.out.println(exception);
             }
-        });
-    }
-
-    @AfterClass
-    public static void tearDownStage() {
-        Platform.runLater(() -> {
-            testAddressBookStage.hide();
         });
     }
 
@@ -60,7 +56,6 @@ public class AddressBookFXMLControllerTest extends ApplicationTest {
         assertThat(addAddressButton.getText(), is("Add"));
         assertTrue(addAddressButton.isVisible());
         clickOn(addAddressButton);
-        press(KeyCode.ESCAPE);
     }
 
     @Test
@@ -69,7 +64,6 @@ public class AddressBookFXMLControllerTest extends ApplicationTest {
         assertThat(copyAddressButton.getText(), is("Copy"));
         assertTrue(copyAddressButton.isVisible());
         clickOn(copyAddressButton);
-        press(KeyCode.ESCAPE);
     }
 
     @Test
@@ -78,7 +72,6 @@ public class AddressBookFXMLControllerTest extends ApplicationTest {
         assertThat(deleteAddressButton.getText(), is("Delete"));
         assertTrue(deleteAddressButton.isVisible());
         clickOn(deleteAddressButton);
-        press(KeyCode.ESCAPE);
     }
 
     @Test
@@ -86,9 +79,31 @@ public class AddressBookFXMLControllerTest extends ApplicationTest {
         TableView addressBookTableView = GuiTest.find("#addressBookTableView");
         assertTrue(addressBookTableView.isVisible());
         clickOn(addressBookTableView);
-        clickOn("#numberAddressBookTableColumn");
-        clickOn("#nameAddressBookTableColumn");
-        clickOn("#addressAddressBookTableColumn");
+        Node numberAddressBookTableColumn = GuiTest.find("#numberAddressBookTableColumn");
+        assertTrue(numberAddressBookTableColumn.isVisible());
+        clickOn(numberAddressBookTableColumn);
+        Node nameAddressBookTableColumn = GuiTest.find("#nameAddressBookTableColumn");
+        assertTrue(nameAddressBookTableColumn.isVisible());
+        clickOn(nameAddressBookTableColumn);
+        Node addressAddressBookTableColumn = GuiTest.find("#addressAddressBookTableColumn");
+        assertTrue(addressAddressBookTableColumn.isVisible());
+        clickOn(addressAddressBookTableColumn);
+    }
+
+    @After
+    public void closeAddressBookPopupWindows() {
+        press(KeyCode.ESCAPE);
+    }
+
+    @AfterClass
+    public static void tearDownAddressBookStage() {
+        PlatformImpl.runLater(() -> {
+            try {
+                testAddressBookStage.hide();
+            } catch (Exception exception) {
+                System.out.println(exception);
+            }
+        });
     }
 
 }

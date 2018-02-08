@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,6 +21,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
+import org.controlsfx.control.Notifications;
 import org.semux.gui.javafx.wallet.ApplicationLoader;
 import org.semux.gui.javafx.wallet.WalletAccount;
 import org.semux.gui.javafx.wallet.WalletSession;
@@ -73,7 +75,21 @@ public class ReceiveFXMLController implements Initializable {
      */
     @FXML
     private void copy() {
-        System.out.println("Copy");
+        if (true) {
+            Notifications.create()
+                    .title("Copy address.")
+                    .text("Address copied to clipboard.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showInformation();
+        } else {
+            Notifications.create()
+                    .title("Copy address.")
+                    .text("Failed to copy address.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showError();
+        }
     }
 
     /**

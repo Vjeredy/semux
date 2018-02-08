@@ -20,9 +20,14 @@ import javafx.stage.Stage;
 /**
  * Application Class. Loads main scenes, sets up main stage with home scene.
  */
-public class ApplicationLoader extends Application implements org.semux.gui.javafx.wallet.Options {
+public class ApplicationLoader extends Application implements Options {
 
     private static Stage stageMain;
+    private static Scene sceneHome;
+    private static Scene sceneSend;
+    private static Scene sceneReceive;
+    private static Scene sceneTransactions;
+    private static Scene sceneDelegates;
     private static WalletSession currentSession;
     private static final List<Scene> scenesList = new ArrayList();
 
@@ -48,16 +53,17 @@ public class ApplicationLoader extends Application implements org.semux.gui.java
         ApplicationLoader.stageMain = stage;
         // Loading main scenes
         Pane rootHome = FXMLLoader.load(getClass().getResource("scenes/home/HomeFXML.fxml"));
-        Scene sceneHome = new Scene(rootHome, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
+        sceneHome = new Scene(rootHome, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
         Pane rootSend = FXMLLoader.load(getClass().getResource("scenes/send/SendFXML.fxml"));
-        Scene sceneSend = new Scene(rootSend, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
+        sceneSend = new Scene(rootSend, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
         Pane rootReceive = FXMLLoader.load(getClass().getResource("scenes/receive/ReceiveFXML.fxml"));
-        Scene sceneReceive = new Scene(rootReceive, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
+        sceneReceive = new Scene(rootReceive, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
         Pane rootTransactions = FXMLLoader.load(getClass().getResource("scenes/transactions/TransactionsFXML.fxml"));
-        Scene sceneTransactions = new Scene(rootTransactions, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
+        sceneTransactions = new Scene(rootTransactions, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
         Pane rootDelegates = FXMLLoader.load(getClass().getResource("scenes/delegates/DelegatesFXML.fxml"));
-        Scene sceneDelegates = new Scene(rootDelegates, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
-        scenesList.addAll(Arrays.asList(sceneHome, sceneSend, sceneReceive, sceneTransactions, sceneDelegates));
+        sceneDelegates = new Scene(rootDelegates, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
+        scenesList.addAll(Arrays.asList(getSceneHome(), getSceneSend(), getSceneReceive(), getSceneTransactions(),
+                getSceneDelegates()));
         scenesList.stream().forEach((scene) -> {
             StylesLoader stylesLoader = new StylesLoader(scene, MAIN_PACKAGE_NAME + DEFAULT_STYLES_PATH);
         });
@@ -65,7 +71,7 @@ public class ApplicationLoader extends Application implements org.semux.gui.java
         stage.setTitle("Semux Wallet");
         stage.setMinWidth(MIN_MAIN_STAGE_WIDTH);
         stage.setMinHeight(MIN_MAIN_STAGE_HEIGHT);
-        StageBuilder builder = new StageBuilder(stageMain, sceneHome);
+        StageBuilder builder = new StageBuilder(stageMain, getSceneHome());
         // Update values in new thread
         WalletUpdater updater = new WalletUpdater(newSession);
     }
@@ -104,6 +110,26 @@ public class ApplicationLoader extends Application implements org.semux.gui.java
      */
     public static WalletSession getCurrentSession() {
         return currentSession;
+    }
+
+    public static Scene getSceneHome() {
+        return sceneHome;
+    }
+
+    public static Scene getSceneSend() {
+        return sceneSend;
+    }
+
+    public static Scene getSceneReceive() {
+        return sceneReceive;
+    }
+
+    public static Scene getSceneTransactions() {
+        return sceneTransactions;
+    }
+
+    public static Scene getSceneDelegates() {
+        return sceneDelegates;
     }
 
 }

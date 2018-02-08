@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  * 
  * @author jeredy
  */
-public class DialogBuilder implements org.semux.gui.javafx.wallet.Options {
+public class DialogBuilder implements Options {
 
     /**
      * Builder constructor dialog windows. Loads logo, sets graphic and .css styles.

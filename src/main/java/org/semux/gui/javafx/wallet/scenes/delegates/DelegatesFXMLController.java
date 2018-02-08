@@ -15,6 +15,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
@@ -24,14 +25,16 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
+import org.controlsfx.control.Notifications;
 import org.semux.gui.javafx.wallet.TextFieldFormatter;
 import org.semux.gui.javafx.wallet.controls.navigation.NavigationButtonsActivator;
+import org.semux.gui.javafx.wallet.Options;
 
 /**
  * Delegates scene controller. Processes votes, unvotes, delegates
  * registrations.
  */
-public class DelegatesFXMLController implements Initializable, org.semux.gui.javafx.wallet.Options {
+public class DelegatesFXMLController implements Initializable, Options {
 
     private TextFieldFormatter votesFormatter;
     private TextFieldFormatter unvotesFormatter;
@@ -122,6 +125,21 @@ public class DelegatesFXMLController implements Initializable, org.semux.gui.jav
      */
     @FXML
     private void vote() {
+        if (true) {
+            Notifications.create()
+                    .title("Vote delegate.")
+                    .text("Successfully voted.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showInformation();
+        } else {
+            Notifications.create()
+                    .title("Vote delegate.")
+                    .text("Failed to vote.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showError();
+        }
         votesTextField.clear();
         delegatesTableView.requestFocus();
     }
@@ -141,6 +159,21 @@ public class DelegatesFXMLController implements Initializable, org.semux.gui.jav
      */
     @FXML
     private void unvote() {
+        if (true) {
+            Notifications.create()
+                    .title("Unvote delegate.")
+                    .text("Successfully unvoted.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showInformation();
+        } else {
+            Notifications.create()
+                    .title("Unvote delegate.")
+                    .text("Failed to unvote.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showError();
+        }
         unvotesTextField.clear();
         delegatesTableView.requestFocus();
     }
@@ -160,6 +193,21 @@ public class DelegatesFXMLController implements Initializable, org.semux.gui.jav
      */
     @FXML
     private void register() {
+        if (true) {
+            Notifications.create()
+                    .title("Register as delegate.")
+                    .text("Successfully registered.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showInformation();
+        } else {
+            Notifications.create()
+                    .title("Register as delegate.")
+                    .text("Failed to register.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showError();
+        }
         registerNameTextField.clear();
         delegatesTableView.requestFocus();
     }

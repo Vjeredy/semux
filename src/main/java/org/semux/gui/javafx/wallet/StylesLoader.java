@@ -14,7 +14,7 @@ import javafx.scene.control.Dialog;
 /**
  * Loads .css stylesheet and adds it to scene.
  */
-public class StylesLoader implements org.semux.gui.javafx.wallet.Options {
+public class StylesLoader implements Options {
 
     /**
      * Loader constructor for scenes. Loads .css stylesheet and adds it to scene.

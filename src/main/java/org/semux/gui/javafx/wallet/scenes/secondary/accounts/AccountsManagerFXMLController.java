@@ -28,14 +28,14 @@ import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
-
 import org.semux.gui.javafx.wallet.DialogBuilder;
+import org.semux.gui.javafx.wallet.Options;
 
 /**
  * User accounts manager controller. Allows to add new, rename or delete
  * existing accounts.
  */
-public class AccountsManagerFXMLController implements Initializable, org.semux.gui.javafx.wallet.Options {
+public class AccountsManagerFXMLController implements Initializable, Options {
     @FXML
     private AnchorPane anchorPane;
     @FXML
@@ -95,14 +95,19 @@ public class AccountsManagerFXMLController implements Initializable, org.semux.g
         // On confirmation
         acceptButton.addEventFilter(ActionEvent.ACTION, event -> {
             if (true) {
-
+                Notifications.create()
+                        .title("Rename account.")
+                        .text("Account successfully renamed.")
+                        .position(Pos.CENTER)
+                        .owner(anchorPane.getScene().getWindow())
+                        .showInformation();
             } else {
                 rename();
                 Notifications.create()
-                        .title("Wrong name.")
+                        .title("Rename account.")
                         .text("Please enter correct name.")
                         .position(Pos.CENTER)
-                        .showWarning();
+                        .showError();
             }
         });
     }
@@ -145,11 +150,16 @@ public class AccountsManagerFXMLController implements Initializable, org.semux.g
         // On confirmation
         acceptButton.addEventFilter(ActionEvent.ACTION, event -> {
             if (true) {
-
+                Notifications.create()
+                        .title("Add account.")
+                        .text("Account successfully added.")
+                        .position(Pos.CENTER)
+                        .owner(anchorPane.getScene().getWindow())
+                        .showInformation();
             } else {
                 add();
                 Notifications.create()
-                        .title("Wrong name.")
+                        .title("Add account.")
                         .text("Please enter correct name.")
                         .position(Pos.CENTER)
                         .showWarning();
@@ -172,7 +182,21 @@ public class AccountsManagerFXMLController implements Initializable, org.semux.g
      */
     @FXML
     private void delete() {
-        System.out.println("Delete");
+        if (true) {
+            Notifications.create()
+                    .title("Delete account.")
+                    .text("Account successfully deleted.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showInformation();
+        } else {
+            Notifications.create()
+                    .title("Delete account.")
+                    .text("Failed to delete account.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showError();
+        }
     }
 
     /**

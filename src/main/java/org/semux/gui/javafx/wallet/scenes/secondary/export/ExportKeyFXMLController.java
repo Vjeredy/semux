@@ -11,12 +11,15 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+
+import org.controlsfx.control.Notifications;
 
 /**
  * Private key export scene controller.
@@ -53,7 +56,21 @@ public class ExportKeyFXMLController implements Initializable {
      */
     @FXML
     private void copy() {
-        System.out.println("Copy");
+        if (true) {
+            Notifications.create()
+                    .title("Copy private key.")
+                    .text("Private key copied to clipboard.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showInformation();
+        } else {
+            Notifications.create()
+                    .title("Copy private key.")
+                    .text("Failed to copy private key.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showError();
+        }
     }
 
     /**

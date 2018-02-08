@@ -16,6 +16,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -27,23 +28,20 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import org.controlsfx.control.Notifications;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
-
-import static org.semux.gui.javafx.wallet.Options.INIT_BOOK_HEIGHT;
-import static org.semux.gui.javafx.wallet.Options.INIT_BOOK_WIDTH;
-import static org.semux.gui.javafx.wallet.Options.DEFAULT_FEE;
-
 import org.semux.gui.javafx.wallet.ApplicationLoader;
 import org.semux.gui.javafx.wallet.TextFieldFormatter;
 import org.semux.gui.javafx.wallet.controls.navigation.NavigationButtonsActivator;
 import org.semux.gui.javafx.wallet.StageBuilder;
+import org.semux.gui.javafx.wallet.Options;
 
 /**
  * Send scene controller. Allows user to create new transaction and send SEMs to
  * desired address.
  */
-public class SendFXMLController implements Initializable, org.semux.gui.javafx.wallet.Options {
+public class SendFXMLController implements Initializable, Options {
 
     private final Stage bookStage = new Stage();
     private final ToggleGroup radioButtons = new ToggleGroup();
@@ -171,6 +169,21 @@ public class SendFXMLController implements Initializable, org.semux.gui.javafx.w
     @FXML
     private void send() {
         System.out.println(radioButtons.getSelectedToggle());
+        if (true) {
+            Notifications.create()
+                    .title("Send transaction.")
+                    .text("Transaction successfully sent.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showInformation();
+        } else {
+            Notifications.create()
+                    .title("Send transaction.")
+                    .text("Failed to send transaction.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showError();
+        }
         fromAddressChoiceBox.requestFocus();
     }
 

@@ -40,16 +40,16 @@ import javafx.scene.control.TextField;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
-
 import org.semux.gui.javafx.wallet.ApplicationLoader;
 import org.semux.gui.javafx.wallet.DialogBuilder;
 import org.semux.gui.javafx.wallet.StageBuilder;
+import org.semux.gui.javafx.wallet.Options;
 
 /**
  * Custom menu controller. Can be imported .jar packed along with .fxml file
  * into Scene Builder as custom control.
  */
-public class MenuBarFXMLController extends HBox implements org.semux.gui.javafx.wallet.Options {
+public class MenuBarFXMLController extends HBox implements Options {
 
     private final Stage exportStage = new Stage();
     private final Stage accountsStage = new Stage();
@@ -181,14 +181,19 @@ public class MenuBarFXMLController extends HBox implements org.semux.gui.javafx.
         // On confirmation
         acceptButton.addEventFilter(ActionEvent.ACTION, event -> {
             if (true) {
-
+                Notifications.create()
+                        .title("Password change.")
+                        .text("Password successfully changed. Use new password.")
+                        .position(Pos.CENTER)
+                        .owner(menuBar.getScene().getWindow())
+                        .showWarning();
             } else {
                 changePassword();
                 Notifications.create()
-                        .title("Wrong password.")
+                        .title("Password change.")
                         .text("Please enter correct password.")
                         .position(Pos.CENTER)
-                        .showWarning();
+                        .showError();
             }
         });
     }
@@ -198,7 +203,20 @@ public class MenuBarFXMLController extends HBox implements org.semux.gui.javafx.
      */
     @FXML
     private void recoverAccounts() {
-        System.out.println("Recover accounts");
+        if (true) {
+            Notifications.create()
+                    .title("Account recovery.")
+                    .text("Account successfully recovered.")
+                    .position(Pos.CENTER)
+                    .owner(menuBar.getScene().getWindow())
+                    .showInformation();
+        } else {
+            Notifications.create()
+                    .title("Account recovery.")
+                    .text("Account recovery failed.")
+                    .position(Pos.CENTER)
+                    .showError();
+        }
     }
 
     /**
@@ -206,7 +224,20 @@ public class MenuBarFXMLController extends HBox implements org.semux.gui.javafx.
      */
     @FXML
     private void backupWallet() {
-        System.out.println("Backup wallet");
+        if (true) {
+            Notifications.create()
+                    .title("Wallet backup.")
+                    .text("Wallet backup successfully created.")
+                    .position(Pos.CENTER)
+                    .owner(menuBar.getScene().getWindow())
+                    .showInformation();
+        } else {
+            Notifications.create()
+                    .title("Wallet backup.")
+                    .text("Wallet backup failed.")
+                    .position(Pos.CENTER)
+                    .showError();
+        }
     }
 
     /**
@@ -234,14 +265,19 @@ public class MenuBarFXMLController extends HBox implements org.semux.gui.javafx.
         // On confirmation
         acceptButton.addEventFilter(ActionEvent.ACTION, event -> {
             if (true) {
-
+                Notifications.create()
+                        .title("Private key import.")
+                        .text("Private key successfully imported.")
+                        .position(Pos.CENTER)
+                        .owner(menuBar.getScene().getWindow())
+                        .showInformation();
             } else {
                 importKey();
                 Notifications.create()
-                        .title("Wrong key.")
+                        .title("Private key import.")
                         .text("Please enter correct key.")
                         .position(Pos.CENTER)
-                        .showWarning();
+                        .showError();
             }
         });
     }

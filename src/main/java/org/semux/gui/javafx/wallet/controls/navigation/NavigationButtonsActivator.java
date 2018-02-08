@@ -15,10 +15,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
+import org.semux.gui.javafx.wallet.Options;
+
 /**
  * Manages navigation bar buttons appearance.
  */
-public class NavigationButtonsActivator implements org.semux.gui.javafx.wallet.Options {
+public class NavigationButtonsActivator implements Options {
 
     /**
      * Constructor loads icons in the buttons backgrounds and makes one button per

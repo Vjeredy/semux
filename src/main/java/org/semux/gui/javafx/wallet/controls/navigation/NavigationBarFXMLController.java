@@ -7,9 +7,6 @@
 package org.semux.gui.javafx.wallet.controls.navigation;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
@@ -41,21 +38,26 @@ import javafx.stage.StageStyle;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
-
 import org.semux.gui.javafx.wallet.ApplicationLoader;
 import org.semux.gui.javafx.wallet.DialogBuilder;
 import org.semux.gui.javafx.wallet.StageBuilder;
 import org.semux.gui.javafx.wallet.WindowSizeStateWatcher;
+import org.semux.gui.javafx.wallet.Options;
 
 /**
  * Custom navigation buttons bar controller. Can be imported .jar packed along
  * with .fxml file into Scene Builder as custom control.
  */
-public class NavigationBarFXMLController extends HBox implements org.semux.gui.javafx.wallet.Options {
+public class NavigationBarFXMLController extends HBox implements Options {
 
-    private int buttonColumn;
+    private Stage currentStage;
+    private Stage currentLockedStage;
+    private Scene currentSceneHome;
+    private Scene currentSceneSend;
+    private Scene currentSceneReceive;
+    private Scene currentSceneTransactions;
+    private Scene currentSceneDelegates;
     private boolean isLocked = false;
-    private final List<Button> navigationButtonsList = new ArrayList<>();
 
     @FXML
     private Button homeNavigationButton;
@@ -85,28 +87,18 @@ public class NavigationBarFXMLController extends HBox implements org.semux.gui.j
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        // Add a handler to each of navigation buttons
-        navigationButtonsList.addAll(Arrays.asList(homeNavigationButton, sendNavigationButton, receiveNavigationButton,
-                transactionsNavigationButton, delegatesNavigationButton));
-        navigationButtonsList.stream().forEach((button) -> {
-            button.addEventHandler(MouseEvent.MOUSE_CLICKED, new NavigationEventHandler());
-            button.addEventHandler(KeyEvent.KEY_PRESSED, new NavigationEventHandler());
+        // Has to be set after initialization of controllers
+        Platform.runLater(() -> {
+            setDefaultScenes();
         });
     }
 
-    /**
-     * Handles mouse click and key press events, captures pushed navigation button
-     * column in the grid pane.
-     */
-    private class NavigationEventHandler implements EventHandler<Event> {
-        @Override
-        public void handle(Event evt) {
-            if (GridPane.getColumnIndex(((Node) evt.getSource())) == null) {
-                buttonColumn = 0;
-            } else {
-                buttonColumn = GridPane.getColumnIndex(((Node) evt.getSource()));
-            }
-        }
+    private void setDefaultScenes() {
+        currentSceneHome = ApplicationLoader.getSceneHome();
+        currentSceneSend = ApplicationLoader.getSceneSend();
+        currentSceneReceive = ApplicationLoader.getSceneReceive();
+        currentSceneTransactions = ApplicationLoader.getSceneTransactions();
+        currentSceneDelegates = ApplicationLoader.getSceneDelegates();
     }
 
     /**
@@ -157,13 +149,11 @@ public class NavigationBarFXMLController extends HBox implements org.semux.gui.j
             // On confirmation
             acceptButton.addEventFilter(ActionEvent.ACTION, event -> {
                 if (true) {
-                    Stage stage = ApplicationLoader.getStage();
                     Scene scene = gridPane.getParent().getScene();
                     scene.getRoot().setDisable(false);
-                    StageBuilder stageBuilder = new StageBuilder(stage, scene);
-                    Stage lockedStage = (Stage) evt.getSource();
-                    WindowSizeStateWatcher watcher = new WindowSizeStateWatcher(stage, lockedStage);
-                    lockedStage.hide();
+                    StageBuilder stageBuilder = new StageBuilder(currentStage, scene);
+                    WindowSizeStateWatcher watcher = new WindowSizeStateWatcher(currentStage, currentLockedStage);
+                    currentLockedStage.hide();
                     isLocked = false;
                     lockNavigationButton.getStyleClass().remove("navigation-button-active");
                 } else {
@@ -178,51 +168,154 @@ public class NavigationBarFXMLController extends HBox implements org.semux.gui.j
         }
     }
 
-    // Changes scene when navigation button pressed by mouse.
     @FXML
-    private void changeScene() {
-        navigationButtonsList.get(0).requestFocus();
-        Stage stage = ApplicationLoader.getStage();
-        boolean isMaximized = stage.isMaximized();
-        double stageWidth = stage.getWidth();
-        double stageHeight = stage.getHeight();
-        Platform.runLater(() -> {
-            try {
-                stage.setScene(ApplicationLoader.getScenesList().get(buttonColumn));
-            } catch (Exception exception) {
-                System.out.println("Exception" + exception);
-            }
-        });
-        WindowSizeStateWatcher watcher = new WindowSizeStateWatcher(stage, isMaximized, stageWidth, stageHeight);
+    private void loadHomeScene() {
+        ckeckStage().setScene(currentSceneHome);
     }
 
-    // Changes scene when navigation button pressed by enter key.
     @FXML
-    private void changeSceneOnEnterKeyPressed(KeyEvent key) {
+    private void loadHomeSceneOnEnterKeyPressed(KeyEvent key) {
         if (key.getCode().equals(KeyCode.ENTER)) {
-            changeScene();
+            loadHomeScene();
         }
     }
 
-    // Invokes locked wallet stage on mouse click.
+    @FXML
+    private void loadSendScene() {
+        ckeckStage().setScene(currentSceneSend);
+    }
+
+    @FXML
+    private void loadSendSceneOnEnterKeyPressed(KeyEvent key) {
+        if (key.getCode().equals(KeyCode.ENTER)) {
+            loadSendScene();
+        }
+    }
+
+    @FXML
+    private void loadReceiveScene() {
+        ckeckStage().setScene(currentSceneReceive);
+    }
+
+    @FXML
+    private void loadReceiveSceneOnEnterKeyPressed(KeyEvent key) {
+        if (key.getCode().equals(KeyCode.ENTER)) {
+            loadReceiveScene();
+        }
+    }
+
+    @FXML
+    private void loadTransactionsScene() {
+        ckeckStage().setScene(currentSceneTransactions);
+    }
+
+    @FXML
+    private void loadTransactionsSceneOnEnterKeyPressed(KeyEvent key) {
+        if (key.getCode().equals(KeyCode.ENTER)) {
+            loadTransactionsScene();
+        }
+    }
+
+    @FXML
+    private void loadDelegatesScene() {
+        ckeckStage().setScene(currentSceneDelegates);
+    }
+
+    @FXML
+    private void loadDelegatesSceneOnEnterKeyPressed(KeyEvent key) {
+        if (key.getCode().equals(KeyCode.ENTER)) {
+            loadDelegatesScene();
+        }
+    }
+
+    /**
+     * Checks stage before scene change.
+     *
+     * @return checked current stage
+     */
+    private Stage ckeckStage() {
+        homeNavigationButton.requestFocus();
+        currentStage = (Stage) gridPane.getScene().getWindow();
+        boolean isMaximized = currentStage.isMaximized();
+        double stageWidth = currentStage.getWidth();
+        double stageHeight = currentStage.getHeight();
+        WindowSizeStateWatcher watcher = new WindowSizeStateWatcher(currentStage, isMaximized, stageWidth, stageHeight);
+        return currentStage;
+    }
+
+    /**
+     * Invokes locked wallet stage on mouse click.
+     */
     @FXML
     private void lockScreen() {
         if (isLocked == false) {
-            Stage lockedStage = new Stage();
-            lockedStage.addEventFilter(MouseEvent.MOUSE_CLICKED, new LockEventHandler());
+            currentLockedStage = new Stage();
+            currentLockedStage.addEventFilter(MouseEvent.MOUSE_CLICKED, new LockEventHandler());
             lockNavigationButton.getStyleClass().add("navigation-button-active");
-            Stage stage = ApplicationLoader.getStage();
+            currentStage = (Stage) gridPane.getScene().getWindow();
             Scene lockedScene = gridPane.getParent().getScene();
-            lockedStage.initStyle(StageStyle.TRANSPARENT);
+            currentLockedStage.initStyle(StageStyle.TRANSPARENT);
             lockedScene.setFill(Color.TRANSPARENT);
             lockedScene.getRoot().setDisable(true);
-            lockedStage.setTitle("Semux Wallet - Locked");
-            StageBuilder builder = new StageBuilder(lockedStage, lockedScene);
-            WindowSizeStateWatcher watcher = new WindowSizeStateWatcher(lockedStage, stage);
-            stage.setMaximized(false);
-            stage.hide();
+            currentLockedStage.setTitle("Semux Wallet - Locked");
+            StageBuilder builder = new StageBuilder(currentLockedStage, lockedScene);
+            WindowSizeStateWatcher watcher = new WindowSizeStateWatcher(currentLockedStage, currentStage);
+            currentStage.setMaximized(false);
+            currentStage.hide();
             isLocked = true;
         }
+    }
+
+    public Stage getCurrentLockedStage() {
+        return currentLockedStage;
+    }
+
+    public Stage getCurrentStage() {
+        return currentStage;
+    }
+
+    public void setCurrentStage(Stage currentStage) {
+        this.currentStage = currentStage;
+    }
+
+    public Scene getCurrentSceneHome() {
+        return currentSceneHome;
+    }
+
+    public void setCurrentSceneHome(Scene currentSceneHome) {
+        this.currentSceneHome = currentSceneHome;
+    }
+
+    public Scene getCurrentSceneSend() {
+        return currentSceneSend;
+    }
+
+    public void setCurrentSceneSend(Scene currentSceneSend) {
+        this.currentSceneSend = currentSceneSend;
+    }
+
+    public Scene getCurrentSceneReceive() {
+        return currentSceneReceive;
+    }
+
+    public void setCurrentSceneReceive(Scene currentSceneReceive) {
+        this.currentSceneReceive = currentSceneReceive;
+    }
+
+    public Scene getCurrentSceneTransactions() {
+        return currentSceneTransactions;
+    }
+
+    public void setCurrentSceneTransactions(Scene currentSceneTransactions) {
+        this.currentSceneTransactions = currentSceneTransactions;
+    }
+
+    public Scene getCurrentSceneDelegates() {
+        return currentSceneDelegates;
+    }
+
+    public void setCurrentSceneDelegates(Scene currentSceneDelegates) {
+        this.currentSceneDelegates = currentSceneDelegates;
     }
 
 }

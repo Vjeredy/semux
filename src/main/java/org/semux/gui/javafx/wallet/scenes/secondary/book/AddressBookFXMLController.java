@@ -32,13 +32,13 @@ import javafx.scene.layout.GridPane;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
-
 import org.semux.gui.javafx.wallet.DialogBuilder;
+import org.semux.gui.javafx.wallet.Options;
 
 /**
  * User address book controller.
  */
-public class AddressBookFXMLController implements Initializable, org.semux.gui.javafx.wallet.Options {
+public class AddressBookFXMLController implements Initializable, Options {
 
     @FXML
     private AnchorPane anchorPane;
@@ -111,14 +111,19 @@ public class AddressBookFXMLController implements Initializable, org.semux.gui.j
         // On confirmation
         acceptButton.addEventFilter(ActionEvent.ACTION, event -> {
             if (true) {
-
+                Notifications.create()
+                        .title("Add address.")
+                        .text("Address successfully added.")
+                        .position(Pos.CENTER)
+                        .owner(anchorPane.getScene().getWindow())
+                        .showInformation();
             } else {
                 add();
                 Notifications.create()
-                        .title("Wrong address.")
+                        .title("Add address.")
                         .text("Please enter correct address.")
                         .position(Pos.CENTER)
-                        .showWarning();
+                        .showError();
             }
         });
     }
@@ -138,7 +143,21 @@ public class AddressBookFXMLController implements Initializable, org.semux.gui.j
      */
     @FXML
     private void copy() {
-        System.out.println("Copy");
+        if (true) {
+            Notifications.create()
+                    .title("Copy address.")
+                    .text("Address copied to clipboard.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showInformation();
+        } else {
+            Notifications.create()
+                    .title("Copy address.")
+                    .text("Failed to copy address.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showError();
+        }
     }
 
     /**
@@ -156,7 +175,21 @@ public class AddressBookFXMLController implements Initializable, org.semux.gui.j
      */
     @FXML
     private void delete() {
-        System.out.println("Delete");
+        if (true) {
+            Notifications.create()
+                    .title("Delete address.")
+                    .text("Address successfully deleted.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showInformation();
+        } else {
+            Notifications.create()
+                    .title("Delete address.")
+                    .text("Failed to delete address.")
+                    .position(Pos.CENTER)
+                    .owner(anchorPane.getScene().getWindow())
+                    .showError();
+        }
     }
 
     /**
