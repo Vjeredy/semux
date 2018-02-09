@@ -27,7 +27,6 @@ import static org.junit.Assert.assertThat;
 
 public class DelegatesFXMLControllerTest extends ApplicationTest {
 
-    private static Stage testDelegatesStage;
     private static GUITestHelper testDelegatesHelper = new GUITestHelper();
 
     @BeforeClass
@@ -35,7 +34,7 @@ public class DelegatesFXMLControllerTest extends ApplicationTest {
         PlatformImpl.setImplicitExit(true);
         PlatformImpl.startup(() -> {
             testDelegatesHelper.checkLoadedStages();
-            testDelegatesStage = new Stage();
+            Stage testDelegatesStage = new Stage();
             try {
                 Parent mainDelegatesNode = FXMLLoader
                         .load(DelegatesFXMLController.class.getResource("DelegatesFXML.fxml"));

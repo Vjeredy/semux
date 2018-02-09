@@ -10,14 +10,13 @@ package org.semux.gui.javafx.wallet;
  * URLs, paths, sizes, constants.
  */
 public interface Options {
+
     // URLS
     String HELP_URL = "https://github.com/semuxproject/semux/wiki";
 
     String MAIN_PACKAGE_NAME = "wallet/";
     String SCENES_PACKAGE_NAME = "scenes/";
     String RESOURCES_PACKAGE_NAME = "resources/";
-    String STYLES_PACKAGE_NAME = "styles/";
-    String ICONS_PACKAGE_NAME = "icons/";
 
     String RUN_PATH = "/org/semux/gui/javafx/";
 
@@ -27,14 +26,17 @@ public interface Options {
     String TRANSACTIONS_SCENE_PATH = SCENES_PACKAGE_NAME + "transactions/TransactionsFXML.fxml";
     String DELEGATES_SCENE_PATH = SCENES_PACKAGE_NAME + "delegates/DelegatesFXML.fxml";
 
-    String HOME_ICON_PATH = RESOURCES_PACKAGE_NAME + ICONS_PACKAGE_NAME + "home.png";
-    String SEND_ICON_PATH = RESOURCES_PACKAGE_NAME + ICONS_PACKAGE_NAME + "send.png";
-    String RECEIVE_ICON_PATH = RESOURCES_PACKAGE_NAME + ICONS_PACKAGE_NAME + "receive.png";
-    String TRANSACTIONS_ICON_PATH = RESOURCES_PACKAGE_NAME + ICONS_PACKAGE_NAME + "transactions.png";
-    String DELEGATES_ICON_PATH = RESOURCES_PACKAGE_NAME + ICONS_PACKAGE_NAME + "delegates.png";
-    String LOCK_ICON_PATH = RESOURCES_PACKAGE_NAME + ICONS_PACKAGE_NAME + "lock.png";
-    String LOGO_ICON_PATH = RESOURCES_PACKAGE_NAME + ICONS_PACKAGE_NAME + "logo.png";
-    String DEFAULT_STYLES_PATH = RESOURCES_PACKAGE_NAME + STYLES_PACKAGE_NAME + "default.css";
+    String RESOURCES_PATH = "/org/semux/gui/";
+
+    String HOME_ICON_PATH = RESOURCES_PATH + "home.png";
+    String SEND_ICON_PATH = RESOURCES_PATH + "send.png";
+    String RECEIVE_ICON_PATH = RESOURCES_PATH + "receive.png";
+    String TRANSACTIONS_ICON_PATH = RESOURCES_PATH + "transactions.png";
+    String DELEGATES_ICON_PATH = RESOURCES_PATH + "delegates.png";
+    String LOCK_ICON_PATH = RESOURCES_PATH + "lock.png";
+    String LOGO_ICON_PATH = RESOURCES_PATH + "logo.png";
+
+    String DEFAULT_STYLES_PATH = RUN_PATH + MAIN_PACKAGE_NAME + RESOURCES_PACKAGE_NAME + "styles/default.css";
 
     // Main scenes
     float INIT_MAIN_SCENE_WIDTH = 900;

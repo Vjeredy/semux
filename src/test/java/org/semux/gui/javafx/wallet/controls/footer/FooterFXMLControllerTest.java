@@ -21,7 +21,6 @@ import org.testfx.framework.junit.ApplicationTest;
 
 public class FooterFXMLControllerTest extends ApplicationTest {
 
-    private static Stage testFooterStage;
     private static GUITestHelper testFooterHelper = new GUITestHelper();
 
     @BeforeClass
@@ -29,7 +28,7 @@ public class FooterFXMLControllerTest extends ApplicationTest {
         PlatformImpl.setImplicitExit(true);
         PlatformImpl.startup(() -> {
             testFooterHelper.checkLoadedStages();
-            testFooterStage = new Stage();
+            Stage testFooterStage = new Stage();
             try {
                 FXMLLoader footerLoader = new FXMLLoader(FooterFXMLController.class.getResource("FooterFXML.fxml"));
                 HBox rootFooterHbox = new HBox();

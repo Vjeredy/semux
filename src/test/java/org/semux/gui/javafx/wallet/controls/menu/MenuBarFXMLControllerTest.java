@@ -23,7 +23,6 @@ import org.testfx.framework.junit.ApplicationTest;
 
 public class MenuBarFXMLControllerTest extends ApplicationTest {
 
-    private static Stage testMenuBarStage;
     private static GUITestHelper testMenuBarHelper = new GUITestHelper();
 
     @BeforeClass
@@ -31,7 +30,7 @@ public class MenuBarFXMLControllerTest extends ApplicationTest {
         PlatformImpl.setImplicitExit(true);
         PlatformImpl.startup(() -> {
             testMenuBarHelper.checkLoadedStages();
-            testMenuBarStage = new Stage();
+            Stage testMenuBarStage = new Stage();
             try {
                 FXMLLoader menuBarLoader = new FXMLLoader(MenuBarFXMLController.class.getResource("MenuBarFXML.fxml"));
                 HBox rootMenuBarHbox = new HBox();

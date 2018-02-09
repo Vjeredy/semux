@@ -20,7 +20,6 @@ import org.testfx.framework.junit.ApplicationTest;
 
 public class HomeFXMLControllerTest extends ApplicationTest {
 
-    private static Stage testHomeStage;
     private static GUITestHelper testHomeHelper = new GUITestHelper();
 
     @BeforeClass
@@ -28,7 +27,7 @@ public class HomeFXMLControllerTest extends ApplicationTest {
         PlatformImpl.setImplicitExit(true);
         PlatformImpl.startup(() -> {
             testHomeHelper.checkLoadedStages();
-            testHomeStage = new Stage();
+            Stage testHomeStage = new Stage();
             try {
                 Parent mainHomeNode = FXMLLoader.load(HomeFXMLController.class.getResource("HomeFXML.fxml"));
                 testHomeStage.setScene(new Scene(mainHomeNode));
@@ -43,42 +42,42 @@ public class HomeFXMLControllerTest extends ApplicationTest {
 
     @Test
     public void testAccountNameHomeTextField() {
-        testHomeHelper.testCharTextField("accountNameTextField");
+        testHomeHelper.testBoundTextField("accountNameTextField");
     }
 
     @Test
     public void testBlockNumberHomeTextField() {
-        testHomeHelper.testCharTextField("blockNumberTextField");
+        testHomeHelper.testBoundTextField("blockNumberTextField");
     }
 
     @Test
     public void testBlockTimeHomeTextField() {
-        testHomeHelper.testCharTextField("blockTimeTextField");
+        testHomeHelper.testBoundTextField("blockTimeTextField");
     }
 
     @Test
     public void testCoinbaseHomeTextField() {
-        testHomeHelper.testCharTextField("coinbaseTextField");
+        testHomeHelper.testBoundTextField("coinbaseTextField");
     }
 
     @Test
     public void testStatusHomeTextField() {
-        testHomeHelper.testCharTextField("statusTextField");
+        testHomeHelper.testBoundTextField("statusTextField");
     }
 
     @Test
     public void testAvailableHomeTextField() {
-        testHomeHelper.testCharTextField("availableTextField");
+        testHomeHelper.testBoundTextField("availableTextField");
     }
 
     @Test
     public void testLockedHomeTextField() {
-        testHomeHelper.testCharTextField("lockedTextField");
+        testHomeHelper.testBoundTextField("lockedTextField");
     }
 
     @Test
     public void testTotalBalanceHomeTextField() {
-        testHomeHelper.testCharTextField("totalBalanceTextField");
+        testHomeHelper.testBoundTextField("totalBalanceTextField");
     }
 
     @Test

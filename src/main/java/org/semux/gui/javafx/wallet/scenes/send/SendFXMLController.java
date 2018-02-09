@@ -31,11 +31,8 @@ import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
-import org.semux.gui.javafx.wallet.ApplicationLoader;
-import org.semux.gui.javafx.wallet.TextFieldFormatter;
+import org.semux.gui.javafx.wallet.*;
 import org.semux.gui.javafx.wallet.controls.navigation.NavigationButtonsActivator;
-import org.semux.gui.javafx.wallet.StageBuilder;
-import org.semux.gui.javafx.wallet.Options;
 
 /**
  * Send scene controller. Allows user to create new transaction and send SEMs to
@@ -126,9 +123,13 @@ public class SendFXMLController implements Initializable, Options {
     private void openAddressBook() throws Exception {
         bookStage.hide();
         String scenePath = RUN_PATH + MAIN_PACKAGE_NAME + "scenes/secondary/book/AddressBookFXML.fxml";
-        Scene bookScene = new Scene(FXMLLoader.load(getClass()
-                .getResource(scenePath)), INIT_BOOK_WIDTH, INIT_BOOK_HEIGHT);
-        StageBuilder builder = new StageBuilder(bookStage, bookScene);
+        try {
+            Scene bookScene = new Scene(FXMLLoader.load(getClass()
+                    .getResource(scenePath)), INIT_BOOK_WIDTH, INIT_BOOK_HEIGHT);
+            StageBuilder builder = new StageBuilder(bookStage, bookScene);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     /**

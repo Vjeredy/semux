@@ -22,7 +22,6 @@ import org.testfx.framework.junit.ApplicationTest;
 
 public class AccountsManagerFXMLControllerTest extends ApplicationTest {
 
-    private static Stage testAccountsStage;
     private static GUITestHelper testAccountsManagerHelper = new GUITestHelper();
 
     @BeforeClass
@@ -30,7 +29,7 @@ public class AccountsManagerFXMLControllerTest extends ApplicationTest {
         PlatformImpl.setImplicitExit(true);
         PlatformImpl.startup(() -> {
             testAccountsManagerHelper.checkLoadedStages();
-            testAccountsStage = new Stage();
+            Stage testAccountsStage = new Stage();
             try {
                 Parent mainAccountsNode = FXMLLoader
                         .load(AccountsManagerFXMLController.class.getResource("AccountsManagerFXML.fxml"));

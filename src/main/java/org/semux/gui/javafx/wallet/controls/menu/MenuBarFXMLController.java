@@ -38,10 +38,7 @@ import javafx.scene.control.TextField;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
-import org.semux.gui.javafx.wallet.ApplicationLoader;
-import org.semux.gui.javafx.wallet.DialogBuilder;
-import org.semux.gui.javafx.wallet.StageBuilder;
-import org.semux.gui.javafx.wallet.Options;
+import org.semux.gui.javafx.wallet.*;
 
 /**
  * Custom menu controller. Can be imported .jar packed along with .fxml file
@@ -281,7 +278,7 @@ public class MenuBarFXMLController extends HBox implements Options {
     }
 
     /**
-     * Shows the export private key dialog.
+     * Shows the export private key scene.
      */
     @FXML
     private void exportKey() {

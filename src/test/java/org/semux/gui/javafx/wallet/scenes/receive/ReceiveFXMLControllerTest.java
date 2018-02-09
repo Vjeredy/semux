@@ -22,7 +22,6 @@ import org.semux.gui.javafx.wallet.GUITestHelper;
 
 public class ReceiveFXMLControllerTest extends ApplicationTest {
 
-    private static Stage testReceiveStage;
     private static GUITestHelper testReceiveHelper = new GUITestHelper();
 
     @BeforeClass
@@ -30,7 +29,7 @@ public class ReceiveFXMLControllerTest extends ApplicationTest {
         PlatformImpl.setImplicitExit(true);
         PlatformImpl.startup(() -> {
             testReceiveHelper.checkLoadedStages();
-            testReceiveStage = new Stage();
+            Stage testReceiveStage = new Stage();
             try {
                 Parent mainReceiveNode = FXMLLoader.load(ReceiveFXMLController.class.getResource("ReceiveFXML.fxml"));
                 testReceiveStage.setScene(new Scene(mainReceiveNode));

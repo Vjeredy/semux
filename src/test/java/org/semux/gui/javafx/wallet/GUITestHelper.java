@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.input.KeyCode;
 
 import org.loadui.testfx.GuiTest;
 import org.testfx.framework.junit.ApplicationTest;
@@ -77,6 +76,13 @@ public class GUITestHelper extends ApplicationTest {
         clickOn(textField);
         textField.setText("Test");
         assertThat(textField.getText(), is("Test"));
+        return textField;
+    }
+
+    public TextField testBoundTextField(String textFieldId) {
+        TextField textField = GuiTest.find("#" + textFieldId);
+        assertTrue(textField.isVisible());
+        clickOn(textField);
         return textField;
     }
 

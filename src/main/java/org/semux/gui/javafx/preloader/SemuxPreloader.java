@@ -16,7 +16,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class SemuxPreloader extends Preloader {
+import org.semux.gui.javafx.wallet.Options;
+
+public class SemuxPreloader extends Preloader implements Options {
 
     private Stage stage;
 
@@ -28,7 +30,7 @@ public class SemuxPreloader extends Preloader {
         scenePreloader.setFill(Color.TRANSPARENT);
         stage.setScene(scenePreloader);
         stage.initStyle(StageStyle.TRANSPARENT);
-        Image logo = new Image(getClass().getResourceAsStream("logo.png"));
+        Image logo = new Image(getClass().getResourceAsStream(LOGO_ICON_PATH));
         stage.setTitle("Semux Wallet");
         stage.getIcons().add(logo);
         stage.show();

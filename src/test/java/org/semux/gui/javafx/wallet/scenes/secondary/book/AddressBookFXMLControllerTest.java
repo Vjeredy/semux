@@ -22,7 +22,6 @@ import org.testfx.framework.junit.ApplicationTest;
 
 public class AddressBookFXMLControllerTest extends ApplicationTest {
 
-    private static Stage testAddressBookStage;
     private static GUITestHelper testAddressBookHelper = new GUITestHelper();
 
     @BeforeClass
@@ -30,7 +29,7 @@ public class AddressBookFXMLControllerTest extends ApplicationTest {
         PlatformImpl.setImplicitExit(true);
         PlatformImpl.startup(() -> {
             testAddressBookHelper.checkLoadedStages();
-            testAddressBookStage = new Stage();
+            Stage testAddressBookStage = new Stage();
             try {
                 Parent mainAddressBookNode = FXMLLoader
                         .load(AddressBookFXMLController.class.getResource("AddressBookFXML.fxml"));

@@ -15,7 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.semux.gui.javafx.wallet.GUITestHelper;
@@ -23,7 +22,6 @@ import org.testfx.framework.junit.ApplicationTest;
 
 public class ExportKeyFXMLControllerTest extends ApplicationTest {
 
-    private static Stage testExportKeyStage;
     private static GUITestHelper testExportKeyHelper = new GUITestHelper();
 
     @BeforeClass
@@ -31,7 +29,7 @@ public class ExportKeyFXMLControllerTest extends ApplicationTest {
         PlatformImpl.setImplicitExit(true);
         PlatformImpl.startup(() -> {
             testExportKeyHelper.checkLoadedStages();
-            testExportKeyStage = new Stage();
+            Stage testExportKeyStage = new Stage();
             try {
                 Parent mainExportKeyNode = FXMLLoader
                         .load(ExportKeyFXMLController.class.getResource("ExportKeyFXML.fxml"));

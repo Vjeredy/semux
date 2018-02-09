@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
 import org.semux.gui.javafx.wallet.data.WalletAccount;
 import org.semux.gui.javafx.wallet.data.WalletSession;
 import org.semux.gui.javafx.wallet.data.WalletUpdater;
@@ -70,9 +71,6 @@ public class ApplicationLoader extends Application implements Options {
             exception.printStackTrace();
         }
         scenesList.addAll(Arrays.asList(sceneHome, sceneSend, sceneReceive, sceneTransactions, sceneDelegates));
-        scenesList.stream().forEach((scene) -> {
-            StylesLoader stylesLoader = new StylesLoader(scene, MAIN_PACKAGE_NAME + DEFAULT_STYLES_PATH);
-        });
         // Prepare and show main stage
         stage.setTitle("Semux Wallet");
         stage.setMinWidth(MIN_MAIN_STAGE_WIDTH);
@@ -116,6 +114,10 @@ public class ApplicationLoader extends Application implements Options {
      */
     public static WalletSession getCurrentSession() {
         return currentSession;
+    }
+
+    public static void setCurrentSession(WalletSession currentSession) {
+        ApplicationLoader.currentSession = currentSession;
     }
 
     public static Scene getSceneHome() {

@@ -6,8 +6,6 @@
  */
 package org.semux.gui.javafx.wallet;
 
-import java.net.URL;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Dialog;
 
@@ -16,19 +14,18 @@ import javafx.scene.control.Dialog;
  */
 public class StylesLoader implements Options {
 
+    private static String currentTheme = DEFAULT_STYLES_PATH;
+
     /**
      * Loader constructor for scenes. Loads .css stylesheet and adds it to scene.
      * 
      * @param scene
      *            scene .css file is added to
-     * @param stylePath
-     *            path to .css file
      */
-    public StylesLoader(Scene scene, String stylePath) {
+    public StylesLoader(Scene scene) {
         try {
-            URL cssURL = getClass().getResource(RUN_PATH + stylePath);
-            String css = cssURL.toExternalForm();
-            scene.getStylesheets().add(css);
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add(getClass().getResource(currentTheme).toExternalForm());
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -39,15 +36,22 @@ public class StylesLoader implements Options {
      * 
      * @param dialog
      *            dialog window .css file is added to
-     * @param stylePath
-     *            path to .css file
      */
-    public StylesLoader(Dialog dialog, String stylePath) {
+    public StylesLoader(Dialog dialog) {
         try {
-            dialog.getDialogPane().getStylesheets().add(getClass().getResource(RUN_PATH + stylePath).toExternalForm());
+            dialog.getDialogPane().getStylesheets().clear();
+            dialog.getDialogPane().getStylesheets().add(getClass().getResource(currentTheme).toExternalForm());
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+    }
+
+    public static String getCurrentTheme() {
+        return currentTheme;
+    }
+
+    public static void setCurrentTheme(String currentTheme) {
+        StylesLoader.currentTheme = currentTheme;
     }
 
 }

@@ -28,7 +28,6 @@ import static org.junit.Assert.assertThat;
 
 public class SendFXMLControllerTest extends ApplicationTest {
 
-    private static Stage testSendStage;
     private static GUITestHelper testSendHelper = new GUITestHelper();
 
     @BeforeClass
@@ -36,7 +35,7 @@ public class SendFXMLControllerTest extends ApplicationTest {
         PlatformImpl.setImplicitExit(true);
         PlatformImpl.startup(() -> {
             testSendHelper.checkLoadedStages();
-            testSendStage = new Stage();
+            Stage testSendStage = new Stage();
             try {
                 Parent mainSendNode = FXMLLoader.load(SendFXMLController.class.getResource("SendFXML.fxml"));
                 testSendStage.setScene(new Scene(mainSendNode));

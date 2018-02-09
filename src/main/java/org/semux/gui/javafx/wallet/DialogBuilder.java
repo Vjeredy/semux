@@ -40,7 +40,7 @@ public class DialogBuilder implements Options {
         }
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.getDialogPane().setMinWidth(initialWidth);
-        StylesLoader stylesLoader = new StylesLoader(dialog, MAIN_PACKAGE_NAME + DEFAULT_STYLES_PATH);
+        StylesLoader stylesLoader = new StylesLoader(dialog);
     }
 
 }

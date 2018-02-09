@@ -20,7 +20,6 @@ import org.testfx.framework.junit.ApplicationTest;
 
 public class TransactionsFXMLControllerTest extends ApplicationTest {
 
-    private static Stage testTransactionsStage;
     private static GUITestHelper testTransactionsHelper = new GUITestHelper();
 
     @BeforeClass
@@ -28,7 +27,7 @@ public class TransactionsFXMLControllerTest extends ApplicationTest {
         PlatformImpl.setImplicitExit(true);
         PlatformImpl.startup(() -> {
             testTransactionsHelper.checkLoadedStages();
-            testTransactionsStage = new Stage();
+            Stage testTransactionsStage = new Stage();
             try {
                 Parent mainTransactionsNode = FXMLLoader
                         .load(TransactionsFXMLController.class.getResource("TransactionsFXML.fxml"));

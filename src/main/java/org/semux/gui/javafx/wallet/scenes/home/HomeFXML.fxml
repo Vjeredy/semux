@@ -13,7 +13,7 @@
 <?import org.semux.gui.javafx.wallet.controls.menu.MenuBarFXMLController?>
 <?import org.semux.gui.javafx.wallet.controls.navigation.NavigationBarFXMLController?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="600.0" prefWidth="900.0" styleClass="anchor-pane" stylesheets="@../../resources/styles/default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.semux.gui.javafx.wallet.scenes.home.HomeFXMLController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="600.0" prefWidth="900.0" styleClass="anchor-pane" stylesheets="@../../resources/styles/default.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.semux.gui.javafx.wallet.scenes.home.HomeFXMLController">
     <children>
       <MenuBarFXMLController />
       <NavigationBarFXMLController />

@@ -42,25 +42,25 @@ public class NavigationButtonsActivator implements Options {
         navigationButtonsList.stream().forEach((button) -> {
             switch (button.getText().toLowerCase()) {
             case "home":
-                button.setStyle("-fx-background-image: url('" + RUN_PATH + MAIN_PACKAGE_NAME + HOME_ICON_PATH + "');");
+                button.setStyle("-fx-background-image: url('" + HOME_ICON_PATH + "');");
                 break;
             case "send":
-                button.setStyle("-fx-background-image: url('" + RUN_PATH + MAIN_PACKAGE_NAME + SEND_ICON_PATH + "');");
+                button.setStyle("-fx-background-image: url('" + SEND_ICON_PATH + "');");
                 break;
             case "receive":
                 button.setStyle(
-                        "-fx-background-image: url('" + RUN_PATH + MAIN_PACKAGE_NAME + RECEIVE_ICON_PATH + "');");
+                        "-fx-background-image: url('" + RECEIVE_ICON_PATH + "');");
                 break;
             case "transactions":
                 button.setStyle(
-                        "-fx-background-image: url('" + RUN_PATH + MAIN_PACKAGE_NAME + TRANSACTIONS_ICON_PATH + "');");
+                        "-fx-background-image: url('" + TRANSACTIONS_ICON_PATH + "');");
                 break;
             case "delegates":
                 button.setStyle(
-                        "-fx-background-image: url('" + RUN_PATH + MAIN_PACKAGE_NAME + DELEGATES_ICON_PATH + "');");
+                        "-fx-background-image: url('" + DELEGATES_ICON_PATH + "');");
                 break;
             case "lock":
-                button.setStyle("-fx-background-image: url('" + RUN_PATH + MAIN_PACKAGE_NAME + LOCK_ICON_PATH + "');");
+                button.setStyle("-fx-background-image: url('" + LOCK_ICON_PATH + "');");
                 break;
             }
             if (button.getText().equalsIgnoreCase(buttonText)) {

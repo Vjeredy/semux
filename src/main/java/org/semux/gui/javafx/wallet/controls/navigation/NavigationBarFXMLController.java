@@ -36,11 +36,12 @@ import javafx.stage.StageStyle;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
+import org.semux.gui.javafx.wallet.Options;
 import org.semux.gui.javafx.wallet.ApplicationLoader;
+import org.semux.gui.javafx.wallet.WindowSizeStateWatcher;
 import org.semux.gui.javafx.wallet.DialogBuilder;
 import org.semux.gui.javafx.wallet.StageBuilder;
-import org.semux.gui.javafx.wallet.WindowSizeStateWatcher;
-import org.semux.gui.javafx.wallet.Options;
+import org.semux.gui.javafx.wallet.StylesLoader;
 
 /**
  * Custom navigation buttons bar controller. Can be imported .jar packed along
@@ -183,6 +184,7 @@ public class NavigationBarFXMLController extends HBox implements Options {
 
     @FXML
     private void loadHomeScene() {
+        StylesLoader stylesLoader = new StylesLoader(currentSceneHome);
         ckeckStage().setScene(currentSceneHome);
     }
 
@@ -195,6 +197,7 @@ public class NavigationBarFXMLController extends HBox implements Options {
 
     @FXML
     private void loadSendScene() {
+        StylesLoader stylesLoader = new StylesLoader(currentSceneSend);
         ckeckStage().setScene(currentSceneSend);
     }
 
@@ -207,6 +210,7 @@ public class NavigationBarFXMLController extends HBox implements Options {
 
     @FXML
     private void loadReceiveScene() {
+        StylesLoader stylesLoader = new StylesLoader(currentSceneReceive);
         ckeckStage().setScene(currentSceneReceive);
     }
 
@@ -219,6 +223,7 @@ public class NavigationBarFXMLController extends HBox implements Options {
 
     @FXML
     private void loadTransactionsScene() {
+        StylesLoader stylesLoader = new StylesLoader(currentSceneTransactions);
         ckeckStage().setScene(currentSceneTransactions);
     }
 
@@ -231,6 +236,7 @@ public class NavigationBarFXMLController extends HBox implements Options {
 
     @FXML
     private void loadDelegatesScene() {
+        StylesLoader stylesLoader = new StylesLoader(currentSceneDelegates);
         ckeckStage().setScene(currentSceneDelegates);
     }
 
