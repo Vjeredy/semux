@@ -206,7 +206,8 @@ public class SendFXMLController implements Initializable, Options {
             try {
                 Robot bot = new Robot();
                 bot.keyPress(java.awt.event.KeyEvent.VK_TAB);
-            } catch (Exception e) {
+            } catch (Exception exception) {
+                System.out.println(exception);
             }
         }
     }

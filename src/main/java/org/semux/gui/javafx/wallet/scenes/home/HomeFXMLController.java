@@ -16,8 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import org.semux.gui.javafx.wallet.ApplicationLoader;
-import org.semux.gui.javafx.wallet.WalletAccount;
-import org.semux.gui.javafx.wallet.WalletSession;
+import org.semux.gui.javafx.wallet.data.WalletAccount;
+import org.semux.gui.javafx.wallet.data.WalletSession;
 import org.semux.gui.javafx.wallet.controls.navigation.NavigationButtonsActivator;
 
 /**
@@ -58,15 +58,19 @@ public class HomeFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // Navigation buttons initialization
         NavigationButtonsActivator activator = new NavigationButtonsActivator(anchorPane, "home");
-        // Binding properties
-        final WalletSession currentSession = ApplicationLoader.getCurrentSession();
-        currentAccount = currentSession.getCurrentAccount();
-        initBindings();
-        // Check for account change and rebind if occurred
-        currentSession.getAccountChangeOccurred().addListener((observable, initialValue, newValue) -> {
+        try {
+            // Binding properties
+            final WalletSession currentSession = ApplicationLoader.getCurrentSession();
             currentAccount = currentSession.getCurrentAccount();
             initBindings();
-        });
+            // Check for account change and rebind if occurred
+            currentSession.getAccountChangeOccurred().addListener((observable, initialValue, newValue) -> {
+                currentAccount = currentSession.getCurrentAccount();
+                initBindings();
+            });
+        } catch (Exception exception) {
+            System.out.println("Session data is not loaded: " + exception);
+        }
     }
 
     /**

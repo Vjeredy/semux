@@ -16,6 +16,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.semux.gui.javafx.wallet.data.WalletAccount;
+import org.semux.gui.javafx.wallet.data.WalletSession;
+import org.semux.gui.javafx.wallet.data.WalletUpdater;
 
 /**
  * Application Class. Loads main scenes, sets up main stage with home scene.
@@ -42,7 +45,7 @@ public class ApplicationLoader extends Application implements Options {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         // Dont need to add new account and list if loaded from preloader, just for
         // example
         WalletAccount accountFromPreloader = new WalletAccount();
@@ -52,18 +55,21 @@ public class ApplicationLoader extends Application implements Options {
         currentSession = newSession;
         ApplicationLoader.stageMain = stage;
         // Loading main scenes
-        Pane rootHome = FXMLLoader.load(getClass().getResource("scenes/home/HomeFXML.fxml"));
-        sceneHome = new Scene(rootHome, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
-        Pane rootSend = FXMLLoader.load(getClass().getResource("scenes/send/SendFXML.fxml"));
-        sceneSend = new Scene(rootSend, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
-        Pane rootReceive = FXMLLoader.load(getClass().getResource("scenes/receive/ReceiveFXML.fxml"));
-        sceneReceive = new Scene(rootReceive, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
-        Pane rootTransactions = FXMLLoader.load(getClass().getResource("scenes/transactions/TransactionsFXML.fxml"));
-        sceneTransactions = new Scene(rootTransactions, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
-        Pane rootDelegates = FXMLLoader.load(getClass().getResource("scenes/delegates/DelegatesFXML.fxml"));
-        sceneDelegates = new Scene(rootDelegates, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
-        scenesList.addAll(Arrays.asList(getSceneHome(), getSceneSend(), getSceneReceive(), getSceneTransactions(),
-                getSceneDelegates()));
+        try {
+            Pane rootHome = FXMLLoader.load(getClass().getResource(HOME_SCENE_PATH));
+            sceneHome = new Scene(rootHome, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
+            Pane rootSend = FXMLLoader.load(getClass().getResource(SEND_SCENE_PATH));
+            sceneSend = new Scene(rootSend, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
+            Pane rootReceive = FXMLLoader.load(getClass().getResource(RECEIVE_SCENE_PATH));
+            sceneReceive = new Scene(rootReceive, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
+            Pane rootTransactions = FXMLLoader.load(getClass().getResource(TRANSACTIONS_SCENE_PATH));
+            sceneTransactions = new Scene(rootTransactions, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
+            Pane rootDelegates = FXMLLoader.load(getClass().getResource(DELEGATES_SCENE_PATH));
+            sceneDelegates = new Scene(rootDelegates, INIT_MAIN_SCENE_WIDTH, INIT_MAIN_SCENE_HEIGHT);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        scenesList.addAll(Arrays.asList(sceneHome, sceneSend, sceneReceive, sceneTransactions, sceneDelegates));
         scenesList.stream().forEach((scene) -> {
             StylesLoader stylesLoader = new StylesLoader(scene, MAIN_PACKAGE_NAME + DEFAULT_STYLES_PATH);
         });
@@ -71,7 +77,7 @@ public class ApplicationLoader extends Application implements Options {
         stage.setTitle("Semux Wallet");
         stage.setMinWidth(MIN_MAIN_STAGE_WIDTH);
         stage.setMinHeight(MIN_MAIN_STAGE_HEIGHT);
-        StageBuilder builder = new StageBuilder(stageMain, getSceneHome());
+        StageBuilder builder = new StageBuilder(stageMain, sceneHome);
         // Update values in new thread
         WalletUpdater updater = new WalletUpdater(newSession);
     }

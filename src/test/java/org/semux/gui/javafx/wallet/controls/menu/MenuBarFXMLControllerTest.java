@@ -7,11 +7,8 @@
 package org.semux.gui.javafx.wallet.controls.menu;
 
 import com.sun.javafx.application.PlatformImpl;
-import com.sun.javafx.stage.StageHelper;
 
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.MenuBar;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -19,24 +16,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.loadui.testfx.GuiTest;
+import org.semux.gui.javafx.wallet.GUITestHelper;
 import org.testfx.framework.junit.ApplicationTest;
-
-import static org.junit.Assert.assertTrue;
 
 public class MenuBarFXMLControllerTest extends ApplicationTest {
 
     private static Stage testMenuBarStage;
+    private static GUITestHelper testMenuBarHelper = new GUITestHelper();
 
     @BeforeClass
     public static void loadMenuBarGUI() {
-        PlatformImpl.setImplicitExit(false);
+        PlatformImpl.setImplicitExit(true);
         PlatformImpl.startup(() -> {
+            testMenuBarHelper.checkLoadedStages();
+            testMenuBarStage = new Stage();
             try {
-                testMenuBarStage = new Stage();
                 FXMLLoader menuBarLoader = new FXMLLoader(MenuBarFXMLController.class.getResource("MenuBarFXML.fxml"));
                 HBox rootMenuBarHbox = new HBox();
                 menuBarLoader.setRoot(rootMenuBarHbox);
@@ -45,48 +41,38 @@ public class MenuBarFXMLControllerTest extends ApplicationTest {
                 Parent rootMenuBar = menuBarLoader.load();
                 Scene testMenuBarScene = new Scene(rootMenuBar);
                 testMenuBarStage.setScene(testMenuBarScene);
-                testMenuBarStage.show();
-                testMenuBarStage.toFront();
-                testMenuBarStage.requestFocus();
             } catch (Exception exception) {
-                System.out.println(exception);
+                exception.printStackTrace();
             }
+            testMenuBarStage.show();
+            testMenuBarStage.toFront();
+            testMenuBarStage.requestFocus();
         });
     }
 
     @Test
     public void testMainMenuBar() {
-        MenuBar mainMenuBar = GuiTest.find("#menuBar");
-        assertTrue(mainMenuBar.isVisible());
-        clickOn(mainMenuBar);
+        testMenuBarHelper.testMenu("menuBar");
     }
 
     @Test
     public void testFileMenu() {
-        Node fileMenu = GuiTest.find("#fileMenu");
-        assertTrue(fileMenu.isVisible());
-        clickOn(fileMenu);
+        testMenuBarHelper.testMenu("fileMenu");
     }
 
     @Test
     public void testWalletMenu() {
-        Node walletMenu = GuiTest.find("#walletMenu");
-        assertTrue(walletMenu.isVisible());
-        clickOn(walletMenu);
+        testMenuBarHelper.testMenu("walletMenu");
     }
 
     @Test
     public void testAccountMenu() {
-        Node accountMenu = GuiTest.find("#accountMenu");
-        assertTrue(accountMenu.isVisible());
-        clickOn(accountMenu);
+        testMenuBarHelper.testMenu("accountMenu");
     }
 
     @Test
     public void testHelpMenu() {
-        Node helpMenu = GuiTest.find("#helpMenu");
-        assertTrue(helpMenu.isVisible());
-        clickOn(helpMenu);
+        testMenuBarHelper.testMenu("helpMenu");
     }
 
     @Test
@@ -137,22 +123,7 @@ public class MenuBarFXMLControllerTest extends ApplicationTest {
     @After
     public void closeMenuBarPopupWindows() {
         press(KeyCode.ESCAPE);
-        if (StageHelper.getStages().size() > 1) {
-            PlatformImpl.runLater(() -> {
-                StageHelper.getStages().get(1).hide();
-            });
-        }
-    }
-
-    @AfterClass
-    public static void tearMenuBarStage() {
-        PlatformImpl.runLater(() -> {
-            try {
-                testMenuBarStage.hide();
-            } catch (Exception exception) {
-                System.out.println(exception);
-            }
-        });
+        testMenuBarHelper.checkNewLoadedStage();
     }
 
 }

@@ -16,7 +16,7 @@
 <?import org.semux.gui.javafx.wallet.controls.menu.MenuBarFXMLController?>
 <?import org.semux.gui.javafx.wallet.controls.navigation.NavigationBarFXMLController?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="600.0" prefWidth="900.0" styleClass="anchor-pane" stylesheets="@../../resources/styles/default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.semux.gui.javafx.wallet.scenes.receive.ReceiveFXMLController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="600.0" prefWidth="900.0" styleClass="anchor-pane" stylesheets="@../../resources/styles/default.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.semux.gui.javafx.wallet.scenes.receive.ReceiveFXMLController">
     <children>
       <MenuBarFXMLController />
       <NavigationBarFXMLController />
@@ -37,19 +37,19 @@
             <RowConstraints />
         </rowConstraints>
          <children>
-            <TableView fx:id="accountsTableView" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" GridPane.rowIndex="1" GridPane.rowSpan="8">
+            <TableView fx:id="accountsReceiveTableView" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" GridPane.rowIndex="1" GridPane.rowSpan="8">
               <columns>
-                <TableColumn fx:id="numberTableColumn" minWidth="15.0" prefWidth="15.0" text="#" />
-                <TableColumn fx:id="nameTableColumn" minWidth="80.0" text="Name" />
-                  <TableColumn fx:id="addressTableColumn" minWidth="300.0" prefWidth="300.0" text="Address" />
+                <TableColumn fx:id="numberReceiveTableColumn" minWidth="15.0" prefWidth="15.0" text="#" />
+                <TableColumn fx:id="nameReceiveTableColumn" minWidth="80.0" text="Name" />
+                  <TableColumn fx:id="addressReceiveTableColumn" minWidth="300.0" prefWidth="300.0" text="Address" />
                   <TableColumn fx:id="availableSEMTableColumn" editable="false" minWidth="80.0" sortable="false" text="SEM">
                      <columns>
-                        <TableColumn fx:id="availableTableColumn" minWidth="80.0" prefWidth="200.0" text="Available" />
+                        <TableColumn fx:id="availableReceiveTableColumn" minWidth="80.0" prefWidth="200.0" text="Available" />
                      </columns>
                   </TableColumn>
                   <TableColumn fx:id="lockedSEMTableColumn" editable="false" minWidth="80.0" sortable="false" text="SEM">
                      <columns>
-                        <TableColumn fx:id="lockedTableColumn" minWidth="80.0" prefWidth="180.0" text="Locked" />
+                        <TableColumn fx:id="lockedReceiveTableColumn" minWidth="80.0" prefWidth="180.0" text="Locked" />
                      </columns>
                   </TableColumn>
               </columns>
@@ -67,7 +67,7 @@
             </HBox>
             <HBox alignment="BOTTOM_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <Button fx:id="copyButton" minHeight="40.0" minWidth="110.0" mnemonicParsing="false" onKeyReleased="#copyOnEnterKeyPressed" onMouseClicked="#copy" styleClass="control-interactive" text="Copy Address">
+                  <Button fx:id="copyReceiveButton" minHeight="40.0" minWidth="110.0" mnemonicParsing="false" onKeyReleased="#copyOnEnterKeyPressed" onMouseClicked="#copy" styleClass="control-interactive" text="Copy Address">
                      <font>
                         <Font size="12.0" />
                      </font>

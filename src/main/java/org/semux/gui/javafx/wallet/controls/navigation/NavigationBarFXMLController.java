@@ -6,8 +6,6 @@
  */
 package org.semux.gui.javafx.wallet.controls.navigation;
 
-import java.io.IOException;
-
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
@@ -79,18 +77,28 @@ public class NavigationBarFXMLController extends HBox implements Options {
      * controller.
      */
     public NavigationBarFXMLController() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NavigationBarFXML.fxml"));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
         try {
-            fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
+            FXMLLoader navigationBarLoader = new FXMLLoader(getClass().getResource("NavigationBarFXML.fxml"));
+            navigationBarLoader.setRoot(this);
+            navigationBarLoader.setController(this);
+            navigationBarLoader.load();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
         // Has to be set after initialization of controllers
         Platform.runLater(() -> {
             setDefaultScenes();
         });
+    }
+
+    /**
+     * Handles mouse click on any place of stage event, calls unlock method.
+     */
+    private class LockEventHandler implements EventHandler<Event> {
+        @Override
+        public void handle(Event evt) {
+            unlock(evt);
+        }
     }
 
     private void setDefaultScenes() {
@@ -102,13 +110,18 @@ public class NavigationBarFXMLController extends HBox implements Options {
     }
 
     /**
-     * Handles mouse click on any place of stage event, calls unlock method.
+     * Checks stage before scene change.
+     *
+     * @return checked current stage
      */
-    private class LockEventHandler implements EventHandler<Event> {
-        @Override
-        public void handle(Event evt) {
-            unlock(evt);
-        }
+    private Stage ckeckStage() {
+        homeNavigationButton.requestFocus();
+        currentStage = (Stage) gridPane.getScene().getWindow();
+        boolean isMaximized = currentStage.isMaximized();
+        double stageWidth = currentStage.getWidth();
+        double stageHeight = currentStage.getHeight();
+        WindowSizeStateWatcher watcher = new WindowSizeStateWatcher(currentStage, isMaximized, stageWidth, stageHeight);
+        return currentStage;
     }
 
     /**
@@ -229,21 +242,6 @@ public class NavigationBarFXMLController extends HBox implements Options {
     }
 
     /**
-     * Checks stage before scene change.
-     *
-     * @return checked current stage
-     */
-    private Stage ckeckStage() {
-        homeNavigationButton.requestFocus();
-        currentStage = (Stage) gridPane.getScene().getWindow();
-        boolean isMaximized = currentStage.isMaximized();
-        double stageWidth = currentStage.getWidth();
-        double stageHeight = currentStage.getHeight();
-        WindowSizeStateWatcher watcher = new WindowSizeStateWatcher(currentStage, isMaximized, stageWidth, stageHeight);
-        return currentStage;
-    }
-
-    /**
      * Invokes locked wallet stage on mouse click.
      */
     @FXML
@@ -266,12 +264,12 @@ public class NavigationBarFXMLController extends HBox implements Options {
         }
     }
 
-    public Stage getCurrentLockedStage() {
-        return currentLockedStage;
-    }
-
     public Stage getCurrentStage() {
         return currentStage;
+    }
+
+    public Stage getCurrentLockedStage() {
+        return currentLockedStage;
     }
 
     public void setCurrentStage(Stage currentStage) {

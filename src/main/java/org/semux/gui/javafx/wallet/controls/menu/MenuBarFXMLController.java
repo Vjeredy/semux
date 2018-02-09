@@ -6,8 +6,6 @@
  */
 package org.semux.gui.javafx.wallet.controls.menu;
 
-import java.io.IOException;
-
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -87,13 +85,13 @@ public class MenuBarFXMLController extends HBox implements Options {
      * Constructor loads .fxml file and allows menu to be imported with controller.
      */
     public MenuBarFXMLController() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuBarFXML.fxml"));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
         try {
-            fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
+            FXMLLoader menuBarLoader = new FXMLLoader(getClass().getResource("MenuBarFXML.fxml"));
+            menuBarLoader.setRoot(this);
+            menuBarLoader.setController(this);
+            menuBarLoader.load();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
         // Secondary stages prepared
         exportStage.initOwner(ApplicationLoader.getStage());
@@ -286,24 +284,32 @@ public class MenuBarFXMLController extends HBox implements Options {
      * Shows the export private key dialog.
      */
     @FXML
-    private void exportKey() throws Exception {
+    private void exportKey() {
         exportStage.hide();
         String scenePath = RUN_PATH + MAIN_PACKAGE_NAME + "scenes/secondary/export/ExportKeyFXML.fxml";
-        Scene exportScene = new Scene(FXMLLoader.load(getClass()
-                .getResource(scenePath)), INIT_EXPORT_WIDTH, INIT_EXPORT_HEIGHT);
-        StageBuilder builder = new StageBuilder(exportStage, exportScene);
+        try {
+            Scene exportScene = new Scene(FXMLLoader.load(getClass()
+                    .getResource(scenePath)), INIT_EXPORT_WIDTH, INIT_EXPORT_HEIGHT);
+            StageBuilder builder = new StageBuilder(exportStage, exportScene);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     /**
      * Opens account manager.
      */
     @FXML
-    private void manageAccounts() throws Exception {
+    private void manageAccounts() {
         accountsStage.hide();
         String scenePath = RUN_PATH + MAIN_PACKAGE_NAME + "scenes/secondary/accounts/AccountsManagerFXML.fxml";
-        Scene accountsScene = new Scene(FXMLLoader.load(getClass()
-                .getResource(scenePath)), INIT_ACCOUNTS_WIDTH, INIT_ACCOUNTS_HEIGHT);
-        StageBuilder builder = new StageBuilder(accountsStage, accountsScene);
+        try {
+            Scene accountsScene = new Scene(FXMLLoader.load(getClass()
+                    .getResource(scenePath)), INIT_ACCOUNTS_WIDTH, INIT_ACCOUNTS_HEIGHT);
+            StageBuilder builder = new StageBuilder(accountsStage, accountsScene);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     /**

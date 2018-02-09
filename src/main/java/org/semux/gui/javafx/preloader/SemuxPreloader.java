@@ -35,8 +35,8 @@ public class SemuxPreloader extends Preloader {
     }
 
     @Override
-    public void handleStateChangeNotification(StateChangeNotification scn) {
-        if (scn.getType() == StateChangeNotification.Type.BEFORE_START) {
+    public void handleStateChangeNotification(StateChangeNotification stateChangeNotification) {
+        if (stateChangeNotification.getType() == StateChangeNotification.Type.BEFORE_START) {
             stage.hide();
         }
     }

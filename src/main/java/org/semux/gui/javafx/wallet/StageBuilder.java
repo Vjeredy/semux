@@ -27,15 +27,16 @@ public class StageBuilder implements Options {
      */
     public StageBuilder(Stage stage, Scene scene) {
         Platform.runLater(() -> {
+            stage.setScene(scene);
             try {
-                stage.setScene(scene);
                 Image logo = new Image(getClass().getResourceAsStream(LOGO_ICON_PATH));
                 stage.getIcons().add(logo);
-                stage.show();
-                stage.toFront();
-                stage.requestFocus();
             } catch (Exception exception) {
+                exception.printStackTrace();
             }
+            stage.show();
+            stage.toFront();
+            stage.requestFocus();
         });
     }
 

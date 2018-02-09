@@ -29,11 +29,15 @@ public class DialogBuilder implements Options {
      *            initial dialog window width
      */
     public DialogBuilder(Dialog dialog, float initialWidth) {
-        Image logo = new Image(getClass().getResourceAsStream(LOGO_ICON_PATH));
         Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(logo);
-        ImageView imageView = new ImageView(logo);
-        dialog.setGraphic((Node) imageView);
+        try {
+            Image logo = new Image(getClass().getResourceAsStream(LOGO_ICON_PATH));
+            stage.getIcons().add(logo);
+            ImageView imageView = new ImageView(logo);
+            dialog.setGraphic((Node) imageView);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.getDialogPane().setMinWidth(initialWidth);
         StylesLoader stylesLoader = new StylesLoader(dialog, MAIN_PACKAGE_NAME + DEFAULT_STYLES_PATH);

@@ -25,9 +25,13 @@ public class StylesLoader implements Options {
      *            path to .css file
      */
     public StylesLoader(Scene scene, String stylePath) {
-        URL cssURL = getClass().getResource(RUN_PATH + stylePath);
-        String css = cssURL.toExternalForm();
-        scene.getStylesheets().add(css);
+        try {
+            URL cssURL = getClass().getResource(RUN_PATH + stylePath);
+            String css = cssURL.toExternalForm();
+            scene.getStylesheets().add(css);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     /**
@@ -39,7 +43,11 @@ public class StylesLoader implements Options {
      *            path to .css file
      */
     public StylesLoader(Dialog dialog, String stylePath) {
-        dialog.getDialogPane().getStylesheets().add(getClass().getResource(RUN_PATH + stylePath).toExternalForm());
+        try {
+            dialog.getDialogPane().getStylesheets().add(getClass().getResource(RUN_PATH + stylePath).toExternalForm());
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
 }

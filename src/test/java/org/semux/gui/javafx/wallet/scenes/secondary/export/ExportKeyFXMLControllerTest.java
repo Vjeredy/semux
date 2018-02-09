@@ -8,9 +8,6 @@ package org.semux.gui.javafx.wallet.scenes.secondary.export;
 
 import com.sun.javafx.application.PlatformImpl;
 
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,76 +18,50 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.loadui.testfx.GuiTest;
+import org.semux.gui.javafx.wallet.GUITestHelper;
 import org.testfx.framework.junit.ApplicationTest;
-
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public class ExportKeyFXMLControllerTest extends ApplicationTest {
 
     private static Stage testExportKeyStage;
+    private static GUITestHelper testExportKeyHelper = new GUITestHelper();
 
     @BeforeClass
     public static void loadExportKeyGUI() {
-        PlatformImpl.setImplicitExit(false);
+        PlatformImpl.setImplicitExit(true);
         PlatformImpl.startup(() -> {
+            testExportKeyHelper.checkLoadedStages();
+            testExportKeyStage = new Stage();
             try {
-                testExportKeyStage = new Stage();
                 Parent mainExportKeyNode = FXMLLoader
                         .load(ExportKeyFXMLController.class.getResource("ExportKeyFXML.fxml"));
                 testExportKeyStage.setScene(new Scene(mainExportKeyNode));
-                testExportKeyStage.show();
-                testExportKeyStage.toFront();
-                testExportKeyStage.requestFocus();
             } catch (Exception exception) {
-                System.out.println(exception);
+                exception.printStackTrace();
             }
+            testExportKeyStage.show();
+            testExportKeyStage.toFront();
+            testExportKeyStage.requestFocus();
         });
     }
 
     @Test
     public void testCopyKeyButton() {
-        Button copyKeyButton = GuiTest.find("#copyKeyButton");
-        assertThat(copyKeyButton.getText(), is("Copy private key"));
-        assertTrue(copyKeyButton.isVisible());
-        clickOn(copyKeyButton);
+        testExportKeyHelper.testButton("copyKeyButton", "Copy private key");
     }
 
     @Test
     public void testExportKeyTableView() {
-        TableView exportKeyTableView = GuiTest.find("#exportKeyTableView");
-        assertTrue(exportKeyTableView.isVisible());
-        clickOn(exportKeyTableView);
-        Node numberExportKeyTableColumn = GuiTest.find("#numberExportKeyTableColumn");
-        assertTrue(numberExportKeyTableColumn.isVisible());
-        clickOn(numberExportKeyTableColumn);
-        Node addressExportKeyTableColumn = GuiTest.find("#addressExportKeyTableColumn");
-        assertTrue(addressExportKeyTableColumn.isVisible());
-        clickOn(addressExportKeyTableColumn);
-        Node nameExportKeyTableColumn = GuiTest.find("#nameExportKeyTableColumn");
-        assertTrue(nameExportKeyTableColumn.isVisible());
-        clickOn(nameExportKeyTableColumn);
-        Node keyExportKeyTableColumn = GuiTest.find("#keyExportKeyTableColumn");
-        assertTrue(keyExportKeyTableColumn.isVisible());
-        clickOn(keyExportKeyTableColumn);
+        testExportKeyHelper.testTableView("exportKeyTableView");
+        testExportKeyHelper.testTableColumn("numberExportKeyTableColumn");
+        testExportKeyHelper.testTableColumn("addressExportKeyTableColumn");
+        testExportKeyHelper.testTableColumn("nameExportKeyTableColumn");
+        testExportKeyHelper.testTableColumn("keyExportKeyTableColumn");
     }
 
     @After
     public void closeExportKeyPopupWindows() {
         press(KeyCode.ESCAPE);
-    }
-
-    @AfterClass
-    public static void tearDownExportKeyStage() {
-        PlatformImpl.runLater(() -> {
-            try {
-                testExportKeyStage.hide();
-            } catch (Exception exception) {
-                System.out.println(exception);
-            }
-        });
     }
 
 }

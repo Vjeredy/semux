@@ -44,25 +44,25 @@ public class DelegatesFXMLController implements Initializable, Options {
     @FXML
     private AnchorPane anchorPane;
     @FXML
-    private TableColumn<?, ?> nameTableColumn;
-    @FXML
-    private TableColumn<?, ?> addressTableColumn;
-    @FXML
     private TableView<?> delegatesTableView;
     @FXML
-    private TableColumn<?, ?> rankTableColumn;
+    private TableColumn<?, ?> nameDelegatesTableColumn;
     @FXML
-    private TableColumn<?, ?> votesTableColumn;
+    private TableColumn<?, ?> addressDelegatesTableColumn;
     @FXML
-    private TableColumn<?, ?> votesFromMeTableColumn;
+    private TableColumn<?, ?> rankDelegatesTableColumn;
     @FXML
-    private TableColumn<?, ?> statusTableColumn;
+    private TableColumn<?, ?> votesDelegatesTableColumn;
     @FXML
-    private TableColumn<?, ?> rateTableColumn;
+    private TableColumn<?, ?> votesFromMeDelegatesTableColumn;
+    @FXML
+    private TableColumn<?, ?> statusDelegatesTableColumn;
+    @FXML
+    private TableColumn<?, ?> rateDelegatesTableColumn;
     @FXML
     private TextField delegateTextField;
     @FXML
-    private ChoiceBox<?> addressChoiceBox;
+    private ChoiceBox<?> addressDelegatesChoiceBox;
     @FXML
     private TextField votesTextField;
     @FXML
@@ -74,7 +74,7 @@ public class DelegatesFXMLController implements Initializable, Options {
     @FXML
     private TextField registerNameTextField;
     @FXML
-    private Button registerButton;
+    private Button registerDelegateButton;
 
     /**
      * Initializes the controller class.
@@ -111,7 +111,7 @@ public class DelegatesFXMLController implements Initializable, Options {
         });
         BooleanBinding disableButton = registerNameTextField.textProperty().isEmpty()
                 .or(nameSizeCorrect);
-        registerButton.disableProperty().bind(disableButton);
+        registerDelegateButton.disableProperty().bind(disableButton);
         // Votes formatter
         votesFormatter = new TextFieldFormatter(votesTextField);
         votesFormatter.initFormatter(DEFAULT_FEE);
@@ -231,7 +231,8 @@ public class DelegatesFXMLController implements Initializable, Options {
             try {
                 Robot bot = new Robot();
                 bot.keyPress(java.awt.event.KeyEvent.VK_TAB);
-            } catch (Exception e) {
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
         }
     }

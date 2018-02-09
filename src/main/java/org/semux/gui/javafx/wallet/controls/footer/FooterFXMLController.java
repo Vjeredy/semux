@@ -6,8 +6,6 @@
  */
 package org.semux.gui.javafx.wallet.controls.footer;
 
-import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
@@ -27,13 +25,13 @@ public class FooterFXMLController extends HBox {
      * controller.
      */
     public FooterFXMLController() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FooterFXML.fxml"));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
         try {
-            fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
+            FXMLLoader footerLoader = new FXMLLoader(getClass().getResource("FooterFXML.fxml"));
+            footerLoader.setRoot(this);
+            footerLoader.setController(this);
+            footerLoader.load();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
     }
 

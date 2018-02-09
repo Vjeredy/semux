@@ -27,15 +27,17 @@ public class TransactionsFXMLController implements Initializable {
     @FXML
     private TableView<?> transactionsTableView;
     @FXML
-    private TableColumn<?, ?> typeTableColumn;
+    private TableColumn<?, ?> numberTransactionsTableColumn;
     @FXML
-    private TableColumn<?, ?> destinationTableColumn;
+    private TableColumn<?, ?> typeTransactionsTableColumn;
     @FXML
-    private TableColumn<?, ?> valueTableColumn;
+    private TableColumn<?, ?> destinationTransactionsTableColumn;
     @FXML
-    private TableColumn<?, ?> timeTableColumn;
+    private TableColumn<?, ?> valueTransactionsTableColumn;
     @FXML
-    private TableColumn<?, ?> statusTableColumn;
+    private TableColumn<?, ?> timeTransactionsTableColumn;
+    @FXML
+    private TableColumn<?, ?> statusTransactionsTableColumn;
 
     /**
      * Initializes the controller class.

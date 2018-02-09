@@ -4,7 +4,7 @@
  * Distributed under the MIT software license, see the accompanying file
  * LICENSE or https://opensource.org/licenses/mit-license.php
  */
-package org.semux.gui.javafx.wallet;
+package org.semux.gui.javafx.wallet.data;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.semux.gui.javafx.wallet.data.WalletAccount;
 
 /**
  * All current session data loaded and stored here.

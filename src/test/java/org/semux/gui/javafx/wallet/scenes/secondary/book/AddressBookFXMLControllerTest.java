@@ -8,9 +8,6 @@ package org.semux.gui.javafx.wallet.scenes.secondary.book;
 
 import com.sun.javafx.application.PlatformImpl;
 
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,92 +15,61 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.loadui.testfx.GuiTest;
+import org.semux.gui.javafx.wallet.GUITestHelper;
 import org.testfx.framework.junit.ApplicationTest;
-
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public class AddressBookFXMLControllerTest extends ApplicationTest {
 
     private static Stage testAddressBookStage;
+    private static GUITestHelper testAddressBookHelper = new GUITestHelper();
 
     @BeforeClass
     public static void loadAddressBookGUI() {
-        PlatformImpl.setImplicitExit(false);
+        PlatformImpl.setImplicitExit(true);
         PlatformImpl.startup(() -> {
+            testAddressBookHelper.checkLoadedStages();
+            testAddressBookStage = new Stage();
             try {
-                testAddressBookStage = new Stage();
                 Parent mainAddressBookNode = FXMLLoader
                         .load(AddressBookFXMLController.class.getResource("AddressBookFXML.fxml"));
                 testAddressBookStage.setScene(new Scene(mainAddressBookNode));
-                testAddressBookStage.show();
-                testAddressBookStage.toFront();
-                testAddressBookStage.requestFocus();
             } catch (Exception exception) {
-                System.out.println(exception);
+                exception.printStackTrace();
             }
+            testAddressBookStage.show();
+            testAddressBookStage.toFront();
+            testAddressBookStage.requestFocus();
         });
     }
 
     @Test
     public void testAddAddressButton() {
-        Button addAddressButton = GuiTest.find("#addAddressButton");
-        assertThat(addAddressButton.getText(), is("Add"));
-        assertTrue(addAddressButton.isVisible());
-        clickOn(addAddressButton);
+        testAddressBookHelper.testButton("addAddressButton", "Add");
     }
 
     @Test
     public void testCopyAddressButton() {
-        Button copyAddressButton = GuiTest.find("#copyAddressButton");
-        assertThat(copyAddressButton.getText(), is("Copy"));
-        assertTrue(copyAddressButton.isVisible());
-        clickOn(copyAddressButton);
+        testAddressBookHelper.testButton("copyAddressButton", "Copy");
     }
 
     @Test
     public void testDeleteAddressButton() {
-        Button deleteAddressButton = GuiTest.find("#deleteAddressButton");
-        assertThat(deleteAddressButton.getText(), is("Delete"));
-        assertTrue(deleteAddressButton.isVisible());
-        clickOn(deleteAddressButton);
+        testAddressBookHelper.testButton("deleteAddressButton", "Delete");
     }
 
     @Test
     public void testAddressBookTableView() {
-        TableView addressBookTableView = GuiTest.find("#addressBookTableView");
-        assertTrue(addressBookTableView.isVisible());
-        clickOn(addressBookTableView);
-        Node numberAddressBookTableColumn = GuiTest.find("#numberAddressBookTableColumn");
-        assertTrue(numberAddressBookTableColumn.isVisible());
-        clickOn(numberAddressBookTableColumn);
-        Node nameAddressBookTableColumn = GuiTest.find("#nameAddressBookTableColumn");
-        assertTrue(nameAddressBookTableColumn.isVisible());
-        clickOn(nameAddressBookTableColumn);
-        Node addressAddressBookTableColumn = GuiTest.find("#addressAddressBookTableColumn");
-        assertTrue(addressAddressBookTableColumn.isVisible());
-        clickOn(addressAddressBookTableColumn);
+        testAddressBookHelper.testTableView("addressBookTableView");
+        testAddressBookHelper.testTableColumn("numberAddressBookTableColumn");
+        testAddressBookHelper.testTableColumn("nameAddressBookTableColumn");
+        testAddressBookHelper.testTableColumn("addressAddressBookTableColumn");
     }
 
     @After
     public void closeAddressBookPopupWindows() {
         press(KeyCode.ESCAPE);
-    }
-
-    @AfterClass
-    public static void tearDownAddressBookStage() {
-        PlatformImpl.runLater(() -> {
-            try {
-                testAddressBookStage.hide();
-            } catch (Exception exception) {
-                System.out.println(exception);
-            }
-        });
     }
 
 }

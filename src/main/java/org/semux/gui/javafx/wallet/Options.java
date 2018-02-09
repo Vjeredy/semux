@@ -21,7 +21,11 @@ public interface Options {
 
     String RUN_PATH = "/org/semux/gui/javafx/";
 
-    String HOME_SCENE_PATH = SCENES_PACKAGE_NAME + "HomeFXML.fxml";
+    String HOME_SCENE_PATH = SCENES_PACKAGE_NAME + "home/HomeFXML.fxml";
+    String SEND_SCENE_PATH = SCENES_PACKAGE_NAME + "send/SendFXML.fxml";
+    String RECEIVE_SCENE_PATH = SCENES_PACKAGE_NAME + "receive/ReceiveFXML.fxml";
+    String TRANSACTIONS_SCENE_PATH = SCENES_PACKAGE_NAME + "transactions/TransactionsFXML.fxml";
+    String DELEGATES_SCENE_PATH = SCENES_PACKAGE_NAME + "delegates/DelegatesFXML.fxml";
 
     String HOME_ICON_PATH = RESOURCES_PACKAGE_NAME + ICONS_PACKAGE_NAME + "home.png";
     String SEND_ICON_PATH = RESOURCES_PACKAGE_NAME + ICONS_PACKAGE_NAME + "send.png";

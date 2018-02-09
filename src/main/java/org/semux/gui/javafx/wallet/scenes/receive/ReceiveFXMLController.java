@@ -23,8 +23,8 @@ import javafx.scene.layout.AnchorPane;
 
 import org.controlsfx.control.Notifications;
 import org.semux.gui.javafx.wallet.ApplicationLoader;
-import org.semux.gui.javafx.wallet.WalletAccount;
-import org.semux.gui.javafx.wallet.WalletSession;
+import org.semux.gui.javafx.wallet.data.WalletAccount;
+import org.semux.gui.javafx.wallet.data.WalletSession;
 import org.semux.gui.javafx.wallet.controls.navigation.NavigationButtonsActivator;
 
 /**
@@ -35,21 +35,21 @@ public class ReceiveFXMLController implements Initializable {
     @FXML
     private AnchorPane anchorPane;
     @FXML
-    private TableColumn<?, ?> numberTableColumn;
+    private TableColumn<?, ?> numberReceiveTableColumn;
     @FXML
-    private TableColumn<WalletAccount, String> nameTableColumn;
+    private TableColumn<WalletAccount, String> nameReceiveTableColumn;
     @FXML
-    private TableColumn<WalletAccount, String> addressTableColumn;
+    private TableColumn<WalletAccount, String> addressReceiveTableColumn;
     @FXML
-    private TableColumn<WalletAccount, Double> availableTableColumn;
+    private TableColumn<WalletAccount, Double> availableReceiveTableColumn;
     @FXML
-    private TableColumn<WalletAccount, Double> lockedTableColumn;
+    private TableColumn<WalletAccount, Double> lockedReceiveTableColumn;
     @FXML
     private ImageView qrCodeImageView;
     @FXML
-    private Button copyButton;
+    private Button copyReceiveButton;
     @FXML
-    private TableView<WalletAccount> accountsTableView;
+    private TableView<WalletAccount> accountsReceiveTableView;
 
     /**
      * Initializes the controller class.
@@ -62,12 +62,17 @@ public class ReceiveFXMLController implements Initializable {
         // Navigation buttons initialization
         NavigationButtonsActivator activator = new NavigationButtonsActivator(anchorPane, "receive");
         // Set accounts properties as TableView items
-        nameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        addressTableColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
-        availableTableColumn.setCellValueFactory(new PropertyValueFactory<>("available"));
-        lockedTableColumn.setCellValueFactory(new PropertyValueFactory<>("locked"));
+        nameReceiveTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        addressReceiveTableColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+        availableReceiveTableColumn.setCellValueFactory(new PropertyValueFactory<>("available"));
+        lockedReceiveTableColumn.setCellValueFactory(new PropertyValueFactory<>("locked"));
         final WalletSession currentSession = ApplicationLoader.getCurrentSession();
-        accountsTableView.setItems(currentSession.getObservableAccountsList());
+        try {
+            accountsReceiveTableView.setItems(currentSession.getObservableAccountsList());
+        } catch (Exception exception) {
+            System.out.println("Session data is not loaded: " + exception);
+        }
+
     }
 
     /**
