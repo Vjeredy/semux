@@ -21,8 +21,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import org.apache.commons.cli.ParseException;
 import org.semux.Kernel;
@@ -39,6 +37,7 @@ import org.semux.core.state.DelegateState;
 import org.semux.crypto.Hex;
 import org.semux.crypto.Key;
 import org.semux.exception.LauncherException;
+import org.semux.gui.dialog.AddressBookDialog;
 import org.semux.gui.dialog.InputDialog;
 import org.semux.gui.dialog.SelectDialog;
 import org.semux.gui.model.WalletAccount;
@@ -65,6 +64,8 @@ public class SemuxGui extends Launcher {
 
     protected WalletModel model;
     protected Kernel kernel;
+
+    protected AddressBookDialog addressBookDialog;
 
     protected boolean isRunning;
     protected JFrame main;
@@ -138,6 +139,15 @@ public class SemuxGui extends Launcher {
     }
 
     /**
+     * Returns the address book dialog.
+     * 
+     * @return
+     */
+    public AddressBookDialog getAddressBookDialog() {
+        return addressBookDialog;
+    }
+
+    /**
      * Starts GUI with the given command line arguments.
      *
      * @param args
@@ -203,7 +213,7 @@ public class SemuxGui extends Launcher {
             List<Key> list = wallet.getAccounts();
             for (Key key : list) {
                 Optional<String> name = wallet.getAddressAlias(key.toAddress());
-                options.add(Hex.PREF + key.toAddressString() + (name.isPresent() ? ", " + name.get() : ""));
+                options.add(Hex.PREF + key.toAddressString() + (name.map(s -> ", " + s).orElse("")));
             }
 
             // show select dialog
@@ -259,6 +269,11 @@ public class SemuxGui extends Launcher {
         EventQueue.invokeLater(() -> {
             main = new MainFrame(this);
             main.setVisible(true);
+
+            addressBookDialog = new AddressBookDialog(main, model, kernel.getWallet());
+            model.addListener((ev) -> {
+                addressBookDialog.refresh();
+            });
         });
 
         // start data refresh
@@ -364,7 +379,7 @@ public class SemuxGui extends Launcher {
             for (Key key : kernel.getWallet().getAccounts()) {
                 Account a = as.getAccount(key.toAddress());
                 Optional<String> name = kernel.getWallet().getAddressAlias(key.toAddress());
-                WalletAccount wa = new WalletAccount(key, a, name);
+                WalletAccount wa = new WalletAccount(key, a, name.orElse(null));
                 accounts.add(wa);
             }
             model.setAccounts(accounts);
@@ -403,14 +418,8 @@ public class SemuxGui extends Launcher {
      * Set up the Swing look and feel.
      */
     protected static void setupLookAndFeel() {
-        try {
-            System.setProperty("apple.laf.useScreenMenuBar", "true");
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Semux");
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-                | UnsupportedLookAndFeelException e) {
-            // do nothing
-        }
+        System.setProperty("apple.laf.useScreenMenuBar", "true");
+        System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Semux");
     }
 
     /**
