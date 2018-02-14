@@ -767,6 +767,12 @@
             <artifactId>assertj-swing-junit</artifactId>
             <version>3.8.0</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
@@ -777,6 +783,10 @@
                 <exclusion>
                     <groupId>org.objenesis</groupId>
                     <artifactId>objenesis</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
