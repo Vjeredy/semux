@@ -112,7 +112,7 @@ public class SemuxApiImpl implements SemuxApi {
 
     /**
      * Whether a value is supplied
-     * 
+     *
      * @param value
      * @return
      */
@@ -140,7 +140,6 @@ public class SemuxApiImpl implements SemuxApi {
     @Override
     public ApiHandlerResponse getLatestBlockNumber() {
         return new GetLatestBlockNumberResponse(true, kernel.getBlockchain().getLatestBlockNumber());
-
     }
 
     @Override
@@ -151,6 +150,9 @@ public class SemuxApiImpl implements SemuxApi {
 
     @Override
     public ApiHandlerResponse getBlock(Long blockNum) {
+        if (blockNum == null) {
+            return failure("Parameter `number` is required");
+        }
         Block block = kernel.getBlockchain().getBlock(blockNum);
 
         if (block == null) {
@@ -163,7 +165,17 @@ public class SemuxApiImpl implements SemuxApi {
     @Override
     public ApiHandlerResponse getBlock(String hashString) {
 
-        byte[] hash = Hex.decode0x(hashString);
+        if (!isSet(hashString)) {
+            return failure("Parameter `hash` is required");
+        }
+
+        byte[] hash;
+        try {
+            hash = Hex.decode0x(hashString);
+        } catch (CryptoException ex) {
+            return failure("Parameter `hash` is not a valid hexadecimal string");
+        }
+
         Block block = kernel.getBlockchain().getBlock(hash);
 
         if (block == null) {
@@ -324,14 +336,14 @@ public class SemuxApiImpl implements SemuxApi {
             return failure("Parameter `voter` is required");
         }
 
+        if (!isSet(delegate)) {
+            return failure("Parameter `delegate` is required");
+        }
+
         try {
             voterBytes = Hex.decode0x(voter);
         } catch (CryptoException ex) {
             return failure("Parameter `voter` is not a valid hexadecimal string");
-        }
-
-        if (!isSet(delegate)) {
-            return failure("Parameter `delegate` is required");
         }
 
         try {

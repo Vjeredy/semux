@@ -42,7 +42,6 @@ import org.semux.crypto.Key;
 import org.semux.gui.Action;
 import org.semux.gui.SemuxGui;
 import org.semux.gui.SwingUtil;
-import org.semux.gui.dialog.AddressBookDialog;
 import org.semux.gui.model.WalletAccount;
 import org.semux.gui.model.WalletModel;
 import org.semux.message.GuiMessages;
@@ -53,10 +52,10 @@ public class SendPanel extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
-    private JFrame frame;
+    private transient SemuxGui gui;
     private transient WalletModel model;
-
     private transient Kernel kernel;
+
     private transient Config config;
 
     private JComboBox<AccountItem> selectFrom;
@@ -67,16 +66,13 @@ public class SendPanel extends JPanel implements ActionListener {
     private JRadioButton rdbtnText;
     private JRadioButton rdbtnHex;
 
-    private AddressBookDialog addressBookDialog;
-
     public SendPanel(SemuxGui gui, JFrame frame) {
+        this.gui = gui;
         this.model = gui.getModel();
         this.model.addListener(this);
 
         this.kernel = gui.getKernel();
         this.config = kernel.getConfig();
-
-        this.frame = frame;
 
         setBorder(new LineBorder(Color.LIGHT_GRAY));
 
@@ -300,8 +296,8 @@ public class SendPanel extends JPanel implements ActionListener {
 
         // update account list
         selectFrom.removeAllItems();
-        for (int i = 0; i < list.size(); i++) {
-            selectFrom.addItem(new AccountItem(list.get(i)));
+        for (WalletAccount aList : list) {
+            selectFrom.addItem(new AccountItem(aList));
         }
 
         // recover selected account
@@ -312,11 +308,6 @@ public class SendPanel extends JPanel implements ActionListener {
                     break;
                 }
             }
-        }
-
-        // refresh address book dialog regardless
-        if (addressBookDialog != null) {
-            addressBookDialog.refresh();
         }
     }
 
@@ -385,11 +376,7 @@ public class SendPanel extends JPanel implements ActionListener {
      * Shows the address book.
      */
     protected void showAddressBook() {
-        if (addressBookDialog == null) {
-            addressBookDialog = new AddressBookDialog(frame, model, kernel.getWallet());
-        }
-
-        addressBookDialog.setVisible(true);
+        gui.getAddressBookDialog().setVisible(true);
     }
 
     /**
@@ -448,7 +435,7 @@ public class SendPanel extends JPanel implements ActionListener {
 
             this.account = a;
             this.name = Hex.PREF + account.getKey().toAddressString() + ", " // address
-                    + (alias.isPresent() ? alias.get() + ", " : "") // alias
+                    + (alias.map(s -> s + ", ").orElse("")) // alias
                     + SwingUtil.formatValue(account.getAvailable()); // available
         }
 

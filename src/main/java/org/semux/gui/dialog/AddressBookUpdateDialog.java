@@ -9,7 +9,6 @@ package org.semux.gui.dialog;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Optional;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -34,6 +33,7 @@ import org.semux.util.exception.UnreachableException;
 public class AddressBookUpdateDialog extends JDialog implements ActionListener {
 
     private static final long serialVersionUID = 1L;
+    private static final int MAX_ADDRESS_NAME_LENGTH = 256;
 
     private transient Wallet wallet;
     private transient WalletModel model;
@@ -41,9 +41,9 @@ public class AddressBookUpdateDialog extends JDialog implements ActionListener {
     private JTextField nameText;
     private JTextField addressText;
 
-    public AddressBookUpdateDialog(Window parent, Optional<AddressBookEntry> entry, Wallet wallet, WalletModel model) {
+    public AddressBookUpdateDialog(Window parent, AddressBookEntry entry, Wallet wallet, WalletModel model) {
         super(parent,
-                entry.isPresent() ? GuiMessages.get("EditAddressBookEntry") : GuiMessages.get("AddAddressBookEntry"));
+                entry != null ? GuiMessages.get("EditAddressBookEntry") : GuiMessages.get("AddAddressBookEntry"));
 
         this.wallet = wallet;
         this.model = model;
@@ -51,8 +51,8 @@ public class AddressBookUpdateDialog extends JDialog implements ActionListener {
         JLabel lblName = new JLabel("Name");
         JLabel lblAddress = new JLabel("Address");
 
-        nameText = new JTextField(entry.isPresent() ? entry.get().getName() : "");
-        addressText = new JTextField(entry.isPresent() ? entry.get().getAddress() : "");
+        nameText = new JTextField(entry != null ? entry.getName() : "");
+        addressText = new JTextField(entry != null ? entry.getAddress() : "");
 
         JButton btnCancel = SwingUtil.createDefaultButton(GuiMessages.get("Cancel"), this, Action.CANCEL);
         JButton btnOk = SwingUtil.createDefaultButton(GuiMessages.get("OK"), this, Action.OK);
@@ -113,7 +113,7 @@ public class AddressBookUpdateDialog extends JDialog implements ActionListener {
             String name = nameText.getText().trim();
             String address = addressText.getText().trim();
 
-            if (StringUtils.isEmpty(name)) {
+            if (StringUtils.isEmpty(name) || name.length() > MAX_ADDRESS_NAME_LENGTH) {
                 JOptionPane.showMessageDialog(this, GuiMessages.get("InvalidName"));
                 return;
             }

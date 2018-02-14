@@ -31,9 +31,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.semux.IntegrationTest;
+import org.semux.Kernel;
 import org.semux.Kernel.State;
 import org.semux.KernelMock;
 import org.semux.Network;
@@ -49,6 +51,7 @@ import org.semux.core.state.Delegate;
 import org.semux.crypto.Hex;
 import org.semux.net.NodeManager;
 import org.semux.net.NodeManager.Node;
+import org.semux.net.SemuxChannelInitializer;
 import org.semux.rules.KernelRule;
 import org.semux.util.ApiClient;
 import org.semux.util.Bytes;
@@ -60,6 +63,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Category(IntegrationTest.class)
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ Genesis.class, NodeManager.class })
+@PowerMockIgnore({ "jdk.internal.*", "javax.management.*" })
 public class TransactTest {
 
     private static Logger logger = LoggerFactory.getLogger(TransactTest.class);
@@ -104,14 +108,26 @@ public class TransactTest {
         Set<Node> nodes = new HashSet<>();
         nodes.add(new Node(kernelValidator1.getConfig().p2pListenIp(), kernelValidator1.getConfig().p2pListenPort()));
         nodes.add(new Node(kernelValidator2.getConfig().p2pListenIp(), kernelValidator2.getConfig().p2pListenPort()));
-        mockStatic(NodeManager.class);
-        when(NodeManager.getSeedNodes(Network.DEVNET)).thenReturn(nodes);
 
         // start kernels
         kernelValidator1.start();
         kernelValidator2.start();
         kernelPremine.start();
         kernelReceiver.start();
+
+        List<Kernel> kernels = new ArrayList<>();
+        kernels.add(kernelValidator1);
+        kernels.add(kernelValidator2);
+        kernels.add(kernelPremine);
+        kernels.add(kernelReceiver);
+
+        // connect to each other
+        for (Kernel kernel : kernels) {
+            for (Node node : nodes) {
+                SemuxChannelInitializer ci = new SemuxChannelInitializer(kernel, node);
+                kernel.getClient().connect(node, ci);
+            }
+        }
 
         // wait for kernels
         await().atMost(20, SECONDS).until(() -> kernelValidator1.state() == State.RUNNING
