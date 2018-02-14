@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ChoiceBox;
 
+import org.junit.Ignore;
 import org.loadui.testfx.GuiTest;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -24,7 +25,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class GUITestHelper extends ApplicationTest {
+@Ignore public class GUITestHelper extends ApplicationTest {
 
     private Node testNode(String nodeId) {
         Node node = GuiTest.find("#" + nodeId);

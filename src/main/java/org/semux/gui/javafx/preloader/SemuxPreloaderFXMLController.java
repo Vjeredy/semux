@@ -14,7 +14,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class SemuxPreloaderFXMLController implements Initializable {
+import org.semux.gui.javafx.wallet.Options;
+
+public class SemuxPreloaderFXMLController implements Initializable, Options {
 
     @FXML
     private ImageView imageView;
@@ -27,7 +29,7 @@ public class SemuxPreloaderFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Image banner = new Image(getClass().getResourceAsStream("banner.png"));
+        Image banner = new Image(getClass().getResourceAsStream(LOGO_ICON_PATH));
         imageView.setImage(banner);
     }
 
